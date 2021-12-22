@@ -99,6 +99,10 @@ bool ModulePlayer::Start()
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 5, 0);
+
+	vehicle->collision_listeners.add(this);
+
+	//App->physics->AddConstraintP2P(*decorBody->body, *vehicle->body, car.rear_chassis_offset, car.rear_chassis_offset);
 	
 	return true;
 }
@@ -114,31 +118,23 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	vec3 newCameraPos(0, 0, 0);
-
 	turn = acceleration = brake = 0.0f;
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
 		acceleration = MAX_ACCELERATION;
-		//newCameraPos -= App->camera->Z * 5 * dt;
-		//newCameraPos.y += 2.5f * dt;
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if(turn < TURN_DEGREES)
 			turn +=  TURN_DEGREES;
-
-		App->camera->X = rotate(App->camera->X, TURN_DEGREES, vec3(0.0f, 1.0f, 0.0f));
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		if(turn > -TURN_DEGREES)
 			turn -= TURN_DEGREES;
-
-		App->camera->X = rotate(App->camera->X, -TURN_DEGREES, vec3(0.0f, 1.0f, 0.0f));
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
@@ -146,13 +142,13 @@ update_status ModulePlayer::Update(float dt)
 		brake = BRAKE_POWER;
 	}
 
-	//App->camera->Position += newCameraPos;
-	//App->camera->Reference += newCameraPos;
-
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
 
+	//mat4x4 decorMatrix;
+	//decorBody->GetTransform(&decorMatrix);
+	//decor->transform = decorMatrix;
 	vehicle->Render();
 
 	char title[80];
