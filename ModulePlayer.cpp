@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include "PhysVehicle3D.h"
 #include "PhysBody3D.h"
+#include "ModuleCamera3D.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
@@ -97,7 +98,7 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 12, 10);
+	vehicle->SetPos(0, 5, 0);
 	
 	return true;
 }
@@ -113,29 +114,40 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
+	vec3 newCameraPos(0, 0, 0);
+
 	turn = acceleration = brake = 0.0f;
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
 		acceleration = MAX_ACCELERATION;
+		//newCameraPos -= App->camera->Z * 5 * dt;
+		//newCameraPos.y += 2.5f * dt;
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if(turn < TURN_DEGREES)
 			turn +=  TURN_DEGREES;
+
+		App->camera->X = rotate(App->camera->X, TURN_DEGREES, vec3(0.0f, 1.0f, 0.0f));
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		if(turn > -TURN_DEGREES)
 			turn -= TURN_DEGREES;
+
+		App->camera->X = rotate(App->camera->X, -TURN_DEGREES, vec3(0.0f, 1.0f, 0.0f));
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
 		brake = BRAKE_POWER;
 	}
+
+	//App->camera->Position += newCameraPos;
+	//App->camera->Reference += newCameraPos;
 
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
