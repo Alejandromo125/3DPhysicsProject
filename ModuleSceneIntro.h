@@ -3,6 +3,9 @@
 #include "p2DynArray.h"
 #include "Globals.h"
 #include "Primitive.h"
+#include "glut/glut.h"
+#include "Light.h"
+#include "SString.h"
 
 #define MAX_SNAKE 2
 
@@ -18,6 +21,9 @@ public:
 	bool Start();
 	update_status Update(float dt);
 	bool CleanUp();
+
+	Cube* CreateCube(vec3 pos, vec3 size, Color rgb, float mass, SString name, bool isSensor = false);
+	Cube* CreateRamp(vec3 pos, vec3 size, Color rgb, float angle, vec3 pivot, SString name, float mass, bool isSensor = false);
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
@@ -41,4 +47,7 @@ public:
 
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
+
+	p2List<Cube*> geometryList;
+	p2List<PhysBody3D*> physBodies;
 };

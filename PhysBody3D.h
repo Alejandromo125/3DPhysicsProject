@@ -2,6 +2,7 @@
 #define __PhysBody3D_H__
 
 #include "p2List.h"
+#include "SString.h"
 
 class btRigidBody;
 class Module;
@@ -19,10 +20,16 @@ public:
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
 
+	void SetAsSensor(bool is_sensor);
+	bool IsSensor();
+
 private:
 	btRigidBody* body = nullptr;
 
+	bool isSensor = false;
+
 public:
+	SString name;
 	p2List<Module*> collision_listeners;
 };
 
