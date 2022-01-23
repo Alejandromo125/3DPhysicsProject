@@ -27,6 +27,9 @@ public:
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
+	void Floor(vec3 scale, int posX, int posZ, int cir);
+	void Circuit(int* lvlcircuit, int* circuitx, int poscircuit);
+
 public:
 	/*
 	PhysBody3D* pb_snake[MAX_SNAKE];
@@ -50,4 +53,27 @@ public:
 
 	p2List<Cube*> geometryList;
 	p2List<PhysBody3D*> physBodies;
+
+	p2DynArray<PhysBody3D*> pb_limits;
+	p2DynArray<Cube>s_limits;
+
+	PhysBody3D* pb_cube[5];
+	Cube s_cube[5];
+
+	PhysBody3D* pb_victory;
+	Cube sensor_victory;
+
+	PhysBody3D* pb_tricky;
+	Cube sensor_tricky;
+
+	p2DynArray<PhysBody3D*> pb_endlvl;
+	p2DynArray<Cube>s_endlvl;
+
+	int count = 0;
+	int lvlFx = 0;
+	int gameWinFx = 0;
+	int deadFx = 0;
+	int saving = 0;
+	int randomize = 0;
+	int volume = 10;
 };

@@ -24,13 +24,14 @@ bool ModuleSceneIntro::Start()
 	Mix_ResumeMusic();
 	Mix_SetMusicPosition(0);
 	// Load music
+	App->audio->PlayMusic("Assets/tokyoDrift.ogg");
 	App->audio->PlayMusic("Assets/capitolio3.ogg");
 
 	App->camera->Move(vec3(0.0f, 4.0f, -12.0f));
 	App->camera->LookAt(vec3(0, 3, 0));
 
-	geometryList.add(CreateCube(vec3(-181.0f, 6.5f, -411.212f), vec3(1.0f, 13.0f, 815.0f), { 0.1f, 0.1f, 0.1f }, 0, "wall1"));
-	geometryList.add(CreateCube(vec3(-151.028f, 6.5f, -394.152f), vec3(1.0f, 13.0f, 719.176f), { 0.1f, 0.1f, 0.1f }, 0, "wall2"));
+	/*geometryList.add(CreateCube(vec3(-181.0f, 6.5f, -411.212f), vec3(1.0f, 13.0f, 815.0f), { 0.1f, 0.1f, 0.1f }, 0, "wall1"));
+	geometryList.add(CreateCube(vec3(-151.028f, 6.5f, -394.152f), vec3(1.0f, 13.0f, 719.176f), { 0.1f, 0.1f, 0.1f }, 0, "wall2"));*/
 
 	return ret;
 }
@@ -79,5 +80,25 @@ Cube* ModuleSceneIntro::CreateRamp(vec3 pos, vec3 size, Color rgb, float angle, 
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
+}
+
+void ModuleSceneIntro::Circuit(int* lvlcircuit, int* circuitx, int poscircuit)
+{
+
+	//create sensors
+	if (pb_limits.Count() != 0 && s_limits.Count() != 0 && s_limits.Count() == pb_limits.Count())
+	{
+		for (int i = 0; i < s_limits.Count(); i++)
+		{
+			pb_limits[i]->SetAsSensor(true);
+			pb_limits[i]->collision_listeners.add(this);
+		}
+
+		for (int i = 0; i < s_endlvl.Count(); i++)
+		{
+			pb_endlvl[i]->SetAsSensor(true);
+			pb_endlvl[i]->collision_listeners.add(this);
+		}
+	}
 }
 
