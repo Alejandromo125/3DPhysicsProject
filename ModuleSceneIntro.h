@@ -25,6 +25,8 @@ public:
 	Cube* CreateCube(vec3 pos, vec3 size, Color rgb, float mass, SString name, bool isSensor = false);
 	Cube* CreateRamp(vec3 pos, vec3 size, Color rgb, float angle, vec3 pivot, SString name, float mass, bool isSensor = false);
 
+	void display(float dt);
+
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
 	void Floor(vec3 scale, int posX, int posZ, int cir);
@@ -50,6 +52,8 @@ public:
 
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
+
+	p2List<Cube*> lights;
 
 	p2List<Cube*> geometryList;
 	p2List<PhysBody3D*> physBodies;
