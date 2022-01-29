@@ -202,6 +202,11 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
 
+	if (!App->input->GetKey(SDL_SCANCODE_UP) && !App->input->GetKey(SDL_SCANCODE_DOWN))
+	{
+		vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()));
+	}
+
 	//mat4x4 decorMatrix;
 	//decorBody->GetTransform(&decorMatrix);
 	//decor->transform = decorMatrix;
