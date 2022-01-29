@@ -26,7 +26,7 @@ bool ModuleSceneIntro::Start()
 	Mix_ResumeMusic();
 	Mix_SetMusicPosition(0);
 	// Load music
-	App->audio->PlayMusic("Assets/capitolio3.ogg");
+	//App->audio->PlayMusic("Assets/capitolio3.ogg");
 
 	App->camera->Move(vec3(0.0f, 4.0f, -12.0f));
 	App->camera->LookAt(vec3(0, 3, 0));
