@@ -36,8 +36,11 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 610.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 3", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 860.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 4", false));
 
-    geometryList.add(CreateCube(vec3(-15.0f, 0.0f, 465.0f), vec3(1.0f, 4.0f, 1020.0f), Black, 0, "Left_Railing", false));
-    geometryList.add(CreateCube(vec3(15.0f, 0.0f, 450.0f), vec3(1.0f, 4.0f, 1020.0f), Black, 0, "Right_Railing", false));
+    geometryList.add(CreateCube(vec3(-15.0f, 0.0f, 465.0f), vec3(1.0f, 5.6f, 1020.0f), Black, 0, "Left_Railing", false));
+    geometryList.add(CreateCube(vec3(15.0f, 0.0f, 450.0f), vec3(1.0f, 5.6f, 1020.0f), Black, 0, "Right_Railing", false));
+
+    geometryList.add(CreateCube(vec3(-16.0f, 0.0f, 465.0f), vec3(1.0f, 500.0f, 1020.0f), Invisible, 0, "Inv_Limit", false));
+    geometryList.add(CreateCube(vec3(16.0f, 0.0f, 450.0f), vec3(1.0f, 500.0f, 1020.0f), Invisible, 0, "Inv_Limit", false));
 
 	//geometryList.add(CreateCube(vec3(-181.0f, 6.5f, -411.212f), vec3(1.0f, 13.0f, 815.0f), Blue, 0, "wall1"));
 	//geometryList.add(CreateCube(vec3(-151.028f, 6.5f, -394.152f), vec3(1.0f, 13.0f, 719.176f), Blue, 0, "wall2"));
@@ -135,7 +138,7 @@ void ModuleSceneIntro::display(float dt)
 
     while (itemBodies != nullptr && itemCubes != nullptr)
     {
-        if (itemBodies->data->IsSensor() != true || itemBodies->data->name == "turbo")
+        if ((itemBodies->data->IsSensor() != true || itemBodies->data->name == "turbo") && itemBodies->data->name != "Inv_Limit")
         {
             itemCubes->data->Render();
         }
