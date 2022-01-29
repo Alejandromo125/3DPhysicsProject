@@ -25,7 +25,7 @@ void PhysVehicle3D::Render()
 {
 	Cylinder wheel;
 
-	wheel.color = Blue;
+	wheel.color = Grey;
 
 	for(int i = 0; i < vehicle->getNumWheels(); ++i)
 	{
@@ -37,17 +37,7 @@ void PhysVehicle3D::Render()
 
 		wheel.Render();
 	}
-	/*
-	Cube chassis(info.chassis_size.x, info.chassis_size.y, info.chassis_size.z);
-	vehicle->getChassisWorldTransform().getOpenGLMatrix(&chassis.transform);
-	btQuaternion q = vehicle->getChassisWorldTransform().getRotation();
-	btVector3 offset(info.chassis_offset.x, info.chassis_offset.y, info.chassis_offset.z);
-	offset = offset.rotate(q.getAxis(), q.getAngle());
-
-	chassis.transform.M[12] += offset.getX();
-	chassis.transform.M[13] += offset.getY();
-	chassis.transform.M[14] += offset.getZ();
-	*/
+	
 	Cube chassis(info.chassis_size.x, info.chassis_size.y, info.chassis_size.z);
 	vehicle->getChassisWorldTransform().getOpenGLMatrix(&chassis.transform);
 	btQuaternion q = vehicle->getChassisWorldTransform().getRotation();
@@ -63,7 +53,7 @@ void PhysVehicle3D::Render()
 	btQuaternion q2 = vehicle->getChassisWorldTransform().getRotation();
 	btVector3 offset2(info.chassis2_offset.x, info.chassis2_offset.y, info.chassis2_offset.z);
 	offset2 = offset2.rotate(q2.getAxis(), q2.getAngle());
-	chassis2.color = Red;
+	chassis2.color = Blue;
 	chassis2.transform.M[12] += offset2.getX();
 	chassis2.transform.M[13] += offset2.getY();
 	chassis2.transform.M[14] += offset2.getZ();
@@ -73,7 +63,7 @@ void PhysVehicle3D::Render()
 	btQuaternion q3 = vehicle->getChassisWorldTransform().getRotation();
 	btVector3 offset3(info.chassis3_offset.x, info.chassis3_offset.y, info.chassis3_offset.z);
 	offset3 = offset3.rotate(q3.getAxis(), q3.getAngle());
-	chassis3.color = Red;
+	chassis3.color = Black;
 	chassis3.transform.M[12] += offset3.getX();
 	chassis3.transform.M[13] += offset3.getY();
 	chassis3.transform.M[14] += offset3.getZ();
