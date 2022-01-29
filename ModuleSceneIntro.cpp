@@ -26,13 +26,17 @@ bool ModuleSceneIntro::Start()
 	Mix_ResumeMusic();
 	Mix_SetMusicPosition(0);
 	// Load music
-	//App->audio->PlayMusic("Assets/capitolio3.ogg");
+	App->audio->PlayMusic("Assets/capitolio3.ogg");
 
 	App->camera->Move(vec3(0.0f, 4.0f, -12.0f));
 	App->camera->LookAt(vec3(0, 3, 0));
 
-	geometryList.add(CreateCube(vec3(-181.0f, 6.5f, -411.212f), vec3(1.0f, 13.0f, 815.0f), Blue, 0, "wall1"));
-	geometryList.add(CreateCube(vec3(-151.028f, 6.5f, -394.152f), vec3(1.0f, 13.0f, 719.176f), Blue, 0, "wall2"));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 465.0f), vec3(30.0f, 0.0f, 1000.0f), White, 0, "Ground", false));
+    geometryList.add(CreateCube(vec3(-15.0f, 0.0f, 465.0f), vec3(1.0f, 4.0f, 1000.0f), Black, 0, "Left_Railing", false));
+    geometryList.add(CreateCube(vec3(15.0f, 0.0f, 450.0f), vec3(1.0f, 4.0f, 1000.0f), Black, 0, "Right_Railing", false));
+
+	//geometryList.add(CreateCube(vec3(-181.0f, 6.5f, -411.212f), vec3(1.0f, 13.0f, 815.0f), Blue, 0, "wall1"));
+	//geometryList.add(CreateCube(vec3(-151.028f, 6.5f, -394.152f), vec3(1.0f, 13.0f, 719.176f), Blue, 0, "wall2"));
 
 	return ret;
 }

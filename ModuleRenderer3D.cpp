@@ -82,6 +82,48 @@ bool ModuleRenderer3D::Init()
 		lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
 		lights[0].SetPos(0.0f, 0.0f, 2.5f);
 		lights[0].Init();
+
+		lights[1].ref = GL_LIGHT0;
+		lights[1].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+		lights[1].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
+		lights[1].SetPos(2.5f, 0.0f, 2.5f);
+		lights[1].Init();
+
+		lights[2].ref = GL_LIGHT0;
+		lights[2].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+		lights[2].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
+		lights[2].SetPos(0.0f, 10.0f, 0.0f);
+		lights[2].Init();
+
+		lights[3].ref = GL_LIGHT0;
+		lights[3].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+		lights[3].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
+		lights[3].SetPos(2.5f, 0.0f, 0.0f);
+		lights[3].Init();
+
+		lights[4].ref = GL_LIGHT0;
+		lights[4].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+		lights[4].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
+		lights[4].SetPos(0.0f, 0.0f, 0.0f);
+		lights[4].Init();
+
+		lights[5].ref = GL_LIGHT0;
+		lights[5].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+		lights[5].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
+		lights[5].SetPos(0.0f, 0.0f, -2.5f);
+		lights[5].Init();
+
+		lights[6].ref = GL_LIGHT0;
+		lights[6].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+		lights[6].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
+		lights[6].SetPos(-2.5f, 0.0f, -2.5f);
+		lights[6].Init();
+
+		lights[7].ref = GL_LIGHT0;
+		lights[7].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+		lights[7].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
+		lights[7].SetPos(-2.5f, 0.0f, 0.0f);
+		lights[7].Init();
 		
 		GLfloat MaterialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
 		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MaterialAmbient);
@@ -92,6 +134,14 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		lights[0].Active(true);
+		//lights[1].Active(true);
+		//lights[2].Active(true);
+		//lights[3].Active(true);
+		//lights[4].Active(true);
+		//lights[5].Active(true);
+		//lights[6].Active(true);
+		//lights[7].Active(true);
+
 		glEnable(GL_LIGHTING);
 		glEnable(GL_COLOR_MATERIAL);
 	}
