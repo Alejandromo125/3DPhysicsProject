@@ -54,7 +54,7 @@ bool ModulePlayer::Start()
 	float half_length = car.chassis_size.z*0.5f;
 	
 	vec3 direction(0,-1,0);
-	vec3 axis(-1,0,0);
+	vec3 axis(1,0,0);
 	
 	car.num_wheels = 4;
 	car.wheels = new Wheel[4];
@@ -109,6 +109,7 @@ bool ModulePlayer::Start()
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 5, 0);
+
 	btQuaternion q;
 	q.setEuler(btScalar(180 * DEGTORAD), btScalar(0), btScalar(0));
 	vehicle->SetRotation(q);
