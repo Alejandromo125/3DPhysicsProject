@@ -109,7 +109,9 @@ bool ModulePlayer::Start()
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 5, 0);
-
+	btQuaternion q;
+	q.setEuler(btScalar(180 * DEGTORAD), btScalar(0), btScalar(0));
+	vehicle->SetRotation(q);
 	vehicle->collision_listeners.add(this);
 
 	//App->physics->AddConstraintP2P(*decorBody->body, *vehicle->body, car.rear_chassis_offset, car.rear_chassis_offset);
@@ -198,6 +200,46 @@ update_status ModulePlayer::Update(float dt)
 	seconds_i = seconds_f;
 	decimal_seconds = seconds_f - seconds_i;
 	miliseconds_i = decimal_seconds * 1000;
+
+
+
+	//AIR CONTROL
+	btVector3 airControl;
+	airControl = vehicle->vehicle->getChassisWorldTransform().getOrigin();
+	if (airControl.getY() > 5)
+	{
+		Euler angles = vehicle->GetEulerAngles(vehicle->vehicle->getChassisWorldTransform().getRotation());
+
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			angles.yaw -= (DEGTORAD * 6);
+			btQuaternion q;
+			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
+			vehicle->SetRotation(q);
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			angles.yaw += (DEGTORAD * 6);
+			btQuaternion q;
+			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
+			vehicle->SetRotation(q);
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			angles.roll += (DEGTORAD * 6);
+			btQuaternion q;
+			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
+			vehicle->SetRotation(q);
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			angles.roll -= (DEGTORAD * 6);
+			btQuaternion q;
+			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
+			vehicle->SetRotation(q);
+		}
+	}
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());

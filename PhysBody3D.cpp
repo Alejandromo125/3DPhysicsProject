@@ -1,5 +1,6 @@
 #include "PhysBody3D.h"
 #include "glmath.h"
+#include <cmath>
 #include "Bullet/include/btBulletDynamicsCommon.h"
 
 // =================================================
@@ -45,7 +46,12 @@ void PhysBody3D::SetPos(float x, float y, float z)
 	t.setOrigin(btVector3(x, y, z));
 	body->setWorldTransform(t);
 }
-
+void PhysBody3D::SetRotation(btQuaternion q)
+{
+	btTransform t = body->getWorldTransform();
+	t.setRotation(q);
+	body->setWorldTransform(t);
+}
 void PhysBody3D::SetAsSensor(bool is_sensor)
 {
 	if (this->isSensor != is_sensor)
@@ -58,7 +64,27 @@ void PhysBody3D::SetAsSensor(bool is_sensor)
 			body->setCollisionFlags(body->getCollisionFlags() & ~btCollisionObject::CF_NO_CONTACT_RESPONSE);
 	}
 }
+Euler PhysBody3D::GetEulerAngles(btQuaternion q)
+{
+	Euler euler;
 
+	float sinr_cosp = 2 * (q.getW() * q.getX() + q.getY() * q.getZ());
+	float cosr_cosp = 1 - 2 * (q.getX() * q.getX() + q.getY() * q.getY());
+	euler.roll = std::atan2(sinr_cosp, cosr_cosp);
+
+	float sinp = 2 * (q.getW() * q.getY() - q.getX() * q.getZ());
+	if (std::abs(sinp) >= 1)
+		euler.pitch = std::copysign(M_PI / 2, sinp); // use 90 degrees if out of range
+	else
+		euler.pitch = std::asin(sinp);
+
+	float siny_cosp = 2 * (q.getW() * q.getZ() + q.getY() * q.getX());
+	float cosy_cosp = 1 - 2 * (q.getY() * q.getY() + q.getZ() * q.getZ());
+	euler.yaw = std::atan2(siny_cosp, cosy_cosp);
+
+
+	return euler;
+}
 bool PhysBody3D::IsSensor()
 {
 	return isSensor;
