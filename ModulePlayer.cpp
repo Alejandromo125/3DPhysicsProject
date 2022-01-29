@@ -135,7 +135,6 @@ update_status ModulePlayer::Update(float dt)
 	{
 		acceleration = MAX_ACCELERATION;
 	}
-
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if(turn < TURN_DEGREES)
@@ -148,9 +147,14 @@ update_status ModulePlayer::Update(float dt)
 			turn -= TURN_DEGREES;
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 	{
 		brake = BRAKE_POWER;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	{
+		acceleration= -MAX_ACCELERATION;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -211,33 +215,19 @@ update_status ModulePlayer::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		{
-			angles.yaw -= (DEGTORAD * 6);
+			angles.yaw -= (DEGTORAD * 2);
 			btQuaternion q;
 			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
 			vehicle->SetRotation(q);
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		{
-			angles.yaw += (DEGTORAD * 6);
+			angles.yaw += (DEGTORAD * 2);
 			btQuaternion q;
 			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
 			vehicle->SetRotation(q);
 		}
-
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		{
-			angles.roll += (DEGTORAD * 6);
-			btQuaternion q;
-			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
-			vehicle->SetRotation(q);
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		{
-			angles.roll -= (DEGTORAD * 6);
-			btQuaternion q;
-			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
-			vehicle->SetRotation(q);
-		}
+		
 	}
 
 	char title[80];
