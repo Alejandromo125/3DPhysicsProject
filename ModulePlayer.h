@@ -25,6 +25,7 @@ public:
 public:
 
 	PhysVehicle3D* vehicle;
+	btVector3 initialPosition;
 	float turn;
 	float acceleration;
 	float brake;
