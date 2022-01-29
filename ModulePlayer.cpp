@@ -34,13 +34,13 @@ bool ModulePlayer::Start()
 	car.chassis3_offset.Set(0, 0.7, 1.8);
 	car.chassis4_offset.Set(0, 0.5, 0);
 
-	car.mass = 500.0f;
-	car.suspensionStiffness = 15.88f;
-	car.suspensionCompression = 0.83f;
-	car.suspensionDamping = 0.88f;
-	car.maxSuspensionTravelCm = 1000.0f;
-	car.frictionSlip = 50.5;
-	car.maxSuspensionForce = 6000.0f;
+	car.mass = 130.0f;
+	car.suspensionStiffness = 26.10f;
+	car.suspensionCompression = 1.42f;
+	car.suspensionDamping = 2.35f;
+	car.maxSuspensionTravelCm = 510.0f;
+	car.frictionSlip = 100.5;
+	car.maxSuspensionForce = 1000.0f;
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 0.8f;
@@ -110,10 +110,7 @@ bool ModulePlayer::Start()
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 5, 0);
 
-	btQuaternion q;
-	//q.setEuler(btScalar(180 * DEGTORAD), btScalar(0), btScalar(0));
-	//vehicle->SetRotation()
-	//vehicle->SetRotation(q);
+	
 	vehicle->collision_listeners.add(this);
 
 	//App->physics->AddConstraintP2P(*decorBody->body, *vehicle->body, car.rear_chassis_offset, car.rear_chassis_offset);
@@ -208,7 +205,7 @@ update_status ModulePlayer::Update(float dt)
 	//AIR CONTROL
 	btVector3 airControl;
 	airControl = vehicle->vehicle->getChassisWorldTransform().getOrigin();
-	if (airControl.getY() > 5)
+	if (airControl.getY() > 1)
 	{
 		Euler angles = vehicle->GetEulerAngles(vehicle->vehicle->getChassisWorldTransform().getRotation());
 
