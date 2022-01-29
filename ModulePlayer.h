@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "p2Point.h"
 #include "Timer.h"
+#include "Bullet/include/LinearMath/btVector3.h"
 
 struct PhysVehicle3D;
 
@@ -26,7 +27,7 @@ public:
 
 	PhysVehicle3D* vehicle;
 	btVector3 initialPosition;
-	//btVector3 currentPlayerPosition;
+	btVector3 currentPlayerPosition;
 
 	float turn;
 	float acceleration;

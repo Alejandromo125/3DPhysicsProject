@@ -117,7 +117,7 @@ bool ModulePlayer::Start()
 	vehicle->vehicle->getRigidBody()->setUserPointer(vehicle);
 
 	initialPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
-	//currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
+	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 
 	//App->physics->AddConstraintP2P(*decorBody->body, *vehicle->body, car.rear_chassis_offset, car.rear_chassis_offset);
 
@@ -265,7 +265,7 @@ update_status ModulePlayer::Update(float dt)
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
 	App->window->SetTitle(title);
 
-	//currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
+	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 
 	return UPDATE_CONTINUE;
 }

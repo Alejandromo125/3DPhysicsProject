@@ -129,7 +129,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
         if (body2->name == "Portal")
         {
-            //App->player->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), 0);
+            App->player->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), 0);
         }
     }
 }
