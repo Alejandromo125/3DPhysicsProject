@@ -136,9 +136,26 @@ update_status ModulePlayer::Update(float dt)
 		acceleration = MAX_ACCELERATION;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && (vehicle->GetKmh() < 60))
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && (vehicle->GetKmh() > -30))
 	{
-		acceleration = -MAX_ACCELERATION * 8;
+		if (vehicle->GetKmh() > 10)
+		{
+			brake = BRAKE_POWER / 2;
+		}
+
+		else
+		{
+			/*if (slow == true)
+			{
+				vehicle->body->setLinearVelocity(vehicle->body->getLinearVelocity() / 1.03f);
+			}*/
+
+			if (vehicle->GetKmh() < -30)
+			{
+				acceleration = MAX_ACCELERATION * 5;
+			}
+			acceleration = -MAX_ACCELERATION * 5;
+		}
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
@@ -153,10 +170,10 @@ update_status ModulePlayer::Update(float dt)
 			turn -= TURN_DEGREES;
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
-	{
-		brake = BRAKE_POWER;
-	}
+	//if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	//{
+	//	brake = BRAKE_POWER;
+	//}
 
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 	{
