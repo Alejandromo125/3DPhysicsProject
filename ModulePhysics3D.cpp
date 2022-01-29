@@ -392,7 +392,7 @@ float ModulePhysics3D::DragForce(double velocity)
 {
 	float force;
 
-	float dragCoeficient = 0.5; //Cambiar aqui el Coeficiente de la Drag Force
+	float dragCoeficient = 1.5; //Cambiar aqui el Coeficiente de la Drag Force
 	force = -dragCoeficient * velocity;
 
 	return force;

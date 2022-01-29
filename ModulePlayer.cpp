@@ -148,7 +148,7 @@ update_status ModulePlayer::Update(float dt)
 	{
 		if (vehicle->GetKmh() > 10)
 		{
-			brake = BRAKE_POWER / 2;
+			brake = BRAKE_POWER / 24;
 		}
 
 		else
