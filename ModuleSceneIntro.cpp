@@ -38,6 +38,7 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(0.0f, 11.0f, 15.0f), vec3(32.0f, 2.0f, 2.0f), White, 0, "Barrier_Lap_Sensor", true));
 
     // General setup
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, -390.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part -1", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, -140.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 0", false));
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 110.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 1", false));
@@ -53,6 +54,7 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(0.0f, 11.0f, 1470.0f), vec3(32.0f, 2.0f, 2.0f), White, 0, "Barrier_Lap_T", false));
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1360.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 6", false));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1610.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 7", false));
 
     geometryList.add(CreateCube(vec3(-15.0f, 0.0f, 465.0f), vec3(1.0f, 6.5f, 2560.0f), Black, 0, "Left_Railing", false));
     geometryList.add(CreateCube(vec3(15.0f, 0.0f, 465.0f), vec3(1.0f, 6.5f, 2560.0f), Black, 0, "Right_Railing", false));
@@ -129,7 +131,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
         if (body2->name == "Portal")
         {
-            App->player->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), 0);
+            App->player->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), -95);
         }
     }
 }
