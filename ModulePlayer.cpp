@@ -215,14 +215,14 @@ update_status ModulePlayer::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		{
-			angles.yaw -= (DEGTORAD * 2);
+			angles.yaw -= (DEGTORAD * 4);
 			btQuaternion q;
 			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
 			vehicle->SetRotation(q);
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		{
-			angles.yaw += (DEGTORAD * 2);
+			angles.yaw += (DEGTORAD * 4);
 			btQuaternion q;
 			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
 			vehicle->SetRotation(q);
