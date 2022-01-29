@@ -5,11 +5,12 @@
 #include "PhysVehicle3D.h"
 #include "PhysBody3D.h"
 #include "ModuleCamera3D.h"
+#include "Timer.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
-	//jump_coolddown.Start();
+	jump_coolddown.Start();
 }
 
 ModulePlayer::~ModulePlayer()
@@ -153,29 +154,50 @@ update_status ModulePlayer::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		/*if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
+		if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
 		{
 			vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
 			jump_coolddown.Start();
-		}*/
+		}
 
-		vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
-		//jump_coolddown.Start();
 	}
 
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
 
-	/*float jump_cooldown_calc = 0.0f;
-	jump_cooldown_calc = JUMP_COOLDOWN - jump_coolddown.Read() * 0.001f;
-	if (jump_cooldown_calc < 0)
-		jump_cooldown_calc = 0;*/
-
 	//mat4x4 decorMatrix;
 	//decorBody->GetTransform(&decorMatrix);
 	//decor->transform = decorMatrix;
 	vehicle->Render();
+
+	float jump_cooldown_calc = 0.0f;
+	jump_cooldown_calc = JUMP_COOLDOWN - jump_coolddown.Read() * 0.001f;
+	if (jump_cooldown_calc < 0)
+		jump_cooldown_calc = 0;
+
+	int tiemer_milisec_read = 0;
+	//tiemer_milisec_read = game_timer.Read() - chickens_taken * 2000;
+
+	if (tiemer_milisec_read <= 0)
+	{
+		tiemer_milisec_read = 0;
+	}
+
+	float minutes_f = 0.0f;
+	int minutes_i = 0;
+	float decimal_minutes = 0.0f;
+	float seconds_f = 0.0f;
+	int seconds_i = 0;
+	float decimal_seconds = 0.0f;
+	int miliseconds_i = 0;
+	minutes_f = tiemer_milisec_read * 0.001f * 0.0167f;
+	minutes_i = minutes_f;
+	decimal_minutes = minutes_f - minutes_i;
+	seconds_f = decimal_minutes * 60;
+	seconds_i = seconds_f;
+	decimal_seconds = seconds_f - seconds_i;
+	miliseconds_i = decimal_seconds * 1000;
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());

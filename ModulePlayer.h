@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "Timer.h"
 
 struct PhysVehicle3D;
 
@@ -28,7 +29,9 @@ public:
 	float acceleration;
 	float brake;
 
-//private:
-//
-//	Timer jump_coolddown;
+private:
+
+	Timer jump_coolddown;
+
+	Timer break_timer;
 };
