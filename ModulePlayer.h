@@ -32,6 +32,8 @@ public:
 	float turn;
 	float acceleration;
 	float brake;
+	int delay = 0;
+	int seconds = 0;
 
 	bool inDirt = false;
 

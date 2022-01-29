@@ -225,20 +225,12 @@ update_status ModulePlayer::Update(float dt)
 		tiemer_milisec_read = 0;
 	}
 
-	float minutes_f = 0.0f;
-	int minutes_i = 0;
-	float decimal_minutes = 0.0f;
-	float seconds_f = 0.0f;
-	int seconds_i = 0;
-	float decimal_seconds = 0.0f;
-	int miliseconds_i = 0;
-	minutes_f = tiemer_milisec_read * 0.001f * 0.0167f;
-	minutes_i = minutes_f;
-	decimal_minutes = minutes_f - minutes_i;
-	seconds_f = decimal_minutes * 60;
-	seconds_i = seconds_f;
-	decimal_seconds = seconds_f - seconds_i;
-	miliseconds_i = decimal_seconds * 1000;
+	delay++;
+
+	if ((delay % 60) == 0)
+	{
+		seconds++;
+	}
 
 
 
@@ -267,7 +259,7 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
+	sprintf_s(title, "%.1f Km/h      Total Time %d s", vehicle->GetKmh(), seconds);
 	App->window->SetTitle(title);
 
 	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
