@@ -36,6 +36,8 @@ public:
 	int seconds = 0;
 	int minutes = 0;
 
+	bool winCondition = false;
+
 	bool inDirt = false;
 
 private:

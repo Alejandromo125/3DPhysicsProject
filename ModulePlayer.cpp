@@ -227,17 +227,21 @@ update_status ModulePlayer::Update(float dt)
 
 	delay++;
 
-	if ((delay % 60) == 0)
+	if ((delay % 60) == 0 && winCondition == false)
 	{
 		seconds++;
 	}
 
-	if (seconds == 60)
+	if (seconds == 60 && winCondition == false)
 	{
 		seconds = 0;
 		minutes++;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		winCondition = true;
+	}
 
 
 	//AIR CONTROL
@@ -265,7 +269,16 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h       Total Time: %d m %d s", vehicle->GetKmh(),minutes, seconds);
+	if (winCondition == false)
+	{
+		sprintf_s(title, "%.1f Km/h       Total Time: %d m %d s", vehicle->GetKmh(), minutes, seconds);
+	}
+
+	if (winCondition == true)
+	{
+		sprintf_s(title, "Your Final Time: %d m %d s", minutes, seconds);
+	}
+	
 	App->window->SetTitle(title);
 
 	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
