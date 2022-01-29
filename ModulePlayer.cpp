@@ -119,6 +119,8 @@ bool ModulePlayer::Start()
 	initialPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 
 	//App->physics->AddConstraintP2P(*decorBody->body, *vehicle->body, car.rear_chassis_offset, car.rear_chassis_offset);
+
+	inDirt = false;
 	
 	return true;
 }
@@ -261,6 +263,8 @@ update_status ModulePlayer::Update(float dt)
 	char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
 	App->window->SetTitle(title);
+
+	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 
 	return UPDATE_CONTINUE;
 }

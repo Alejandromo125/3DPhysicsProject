@@ -66,7 +66,7 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 100.0f), vec3(30.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 110.0f), vec3(30.0f, 0.5f, 15.0f), Grey, 0, "Dirt_Slower", false));
-    
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 110.0f), vec3(30.0f, 0.5f, 15.0f), Grey, 0, "Dirt_Slower_Sensor", true));
 
 	//geometryList.add(CreateCube(vec3(-181.0f, 6.5f, -411.212f), vec3(1.0f, 13.0f, 815.0f), Blue, 0, "wall1"));
 	//geometryList.add(CreateCube(vec3(-151.028f, 6.5f, -394.152f), vec3(1.0f, 13.0f, 719.176f), Blue, 0, "wall2"));
@@ -95,6 +95,43 @@ update_status ModuleSceneIntro::Update(float dt)
     display(dt);
 
 	return UPDATE_CONTINUE;
+}
+
+void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
+{
+    if (body1->IsSensor())
+    {
+        LOG("Body1: Im a sensor my name is %s", body1->name.GetString());
+
+    }
+    else if (body2->IsSensor())
+    {
+        LOG("Body2: Im a sensor my name is %s", body2->name.GetString());
+
+        // Example
+        /*
+        if (body2->name == "loopsensor1")
+        {
+            swapCamera = true;
+        }
+        */
+
+        if (body2->name == "Barrier_Lap_Sensor")
+        {
+            
+        }
+
+        if (body2->name == "Dirt_Slower_Sensor")
+        {
+            App->player->inDirt = true;
+        }
+        else App->player->inDirt = false;
+
+        if (body2->name == "Portal")
+        {
+            App->player->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), 0);
+        }
+    }
 }
 
 Cube* ModuleSceneIntro::CreateCube(vec3 pos, vec3 size, Color rgb, float mass, SString name, bool isSensor)

@@ -26,9 +26,13 @@ public:
 
 	PhysVehicle3D* vehicle;
 	btVector3 initialPosition;
+	btVector3 currentPlayerPosition;
+
 	float turn;
 	float acceleration;
 	float brake;
+
+	bool inDirt = false;
 
 private:
 
