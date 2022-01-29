@@ -148,7 +148,7 @@ update_status ModulePlayer::Update(float dt)
 	{
 		if (vehicle->GetKmh() > 10)
 		{
-			brake = BRAKE_POWER / 2;
+			brake = BRAKE_POWER / 24;
 		}
 
 		else
@@ -202,6 +202,11 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
 
+	if (!App->input->GetKey(SDL_SCANCODE_UP) && !App->input->GetKey(SDL_SCANCODE_DOWN))
+	{
+		vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()));
+	}
+
 	//mat4x4 decorMatrix;
 	//decorBody->GetTransform(&decorMatrix);
 	//decor->transform = decorMatrix;
@@ -220,21 +225,23 @@ update_status ModulePlayer::Update(float dt)
 		tiemer_milisec_read = 0;
 	}
 
-	float minutes_f = 0.0f;
-	int minutes_i = 0;
-	float decimal_minutes = 0.0f;
-	float seconds_f = 0.0f;
-	int seconds_i = 0;
-	float decimal_seconds = 0.0f;
-	int miliseconds_i = 0;
-	minutes_f = tiemer_milisec_read * 0.001f * 0.0167f;
-	minutes_i = minutes_f;
-	decimal_minutes = minutes_f - minutes_i;
-	seconds_f = decimal_minutes * 60;
-	seconds_i = seconds_f;
-	decimal_seconds = seconds_f - seconds_i;
-	miliseconds_i = decimal_seconds * 1000;
+	delay++;
 
+	if ((delay % 60) == 0 && winCondition == false)
+	{
+		seconds++;
+	}
+
+	if (seconds == 60 && winCondition == false)
+	{
+		seconds = 0;
+		minutes++;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		winCondition = true;
+	}
 
 
 	//AIR CONTROL
@@ -262,7 +269,16 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
+	if (winCondition == false)
+	{
+		sprintf_s(title, "%.1f Km/h       Total Time: %d m %d s", vehicle->GetKmh(), minutes, seconds);
+	}
+
+	if (winCondition == true)
+	{
+		sprintf_s(title, "Your Final Time: %d m %d s", minutes, seconds);
+	}
+	
 	App->window->SetTitle(title);
 
 	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
