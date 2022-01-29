@@ -129,7 +129,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
         if (body2->name == "Portal")
         {
-            App->player->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), 0);
+            //App->player->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), 0);
         }
     }
 }
@@ -156,10 +156,6 @@ Cube* ModuleSceneIntro::CreateRamp(vec3 pos, vec3 size, Color rgb, float angle, 
 	physBodies.add(App->physics->AddBodyV2(*cube, mass, isSensor, name));
 
 	return cube;
-}
-
-void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
-{
 }
 
 void ModuleSceneIntro::Circuit(int* lvlcircuit, int* circuitx, int poscircuit)

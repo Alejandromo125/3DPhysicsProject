@@ -26,7 +26,7 @@ public:
 
 	PhysVehicle3D* vehicle;
 	btVector3 initialPosition;
-	btVector3 currentPlayerPosition;
+	//btVector3 currentPlayerPosition;
 
 	float turn;
 	float acceleration;
