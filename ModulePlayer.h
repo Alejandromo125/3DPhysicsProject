@@ -35,6 +35,8 @@ public:
 	int delay = 0;
 	int seconds = 0;
 	int minutes = 0;
+	int lastSeconds = 0;
+	int lastMinutes = 0;
 
 	bool winCondition = false;
 

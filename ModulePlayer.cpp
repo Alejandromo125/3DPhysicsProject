@@ -243,6 +243,12 @@ update_status ModulePlayer::Update(float dt)
 		winCondition = true;
 	}
 
+	if (winCondition == true)
+	{
+		lastSeconds = seconds;
+		lastMinutes = minutes;
+	}
+
 
 	//AIR CONTROL
 	btVector3 airControl;
@@ -271,7 +277,7 @@ update_status ModulePlayer::Update(float dt)
 	char title[80];
 	if (winCondition == false)
 	{
-		sprintf_s(title, "%.1f Km/h       Total Time: %d m %d s", vehicle->GetKmh(), minutes, seconds);
+		sprintf_s(title, "%.1f Km/h       Total Time: %d m %d s      Your Last Time: %d m %d s", vehicle->GetKmh(), minutes, seconds, lastSeconds, lastMinutes);
 	}
 
 	if (winCondition == true)
