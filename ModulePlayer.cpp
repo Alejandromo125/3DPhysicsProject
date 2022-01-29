@@ -9,6 +9,7 @@
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
+	//jump_coolddown.Start();
 }
 
 ModulePlayer::~ModulePlayer()
@@ -168,9 +169,26 @@ update_status ModulePlayer::Update(float dt)
 		brake = BRAKE_POWER;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		/*if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
+		{
+			vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
+			jump_coolddown.Start();
+		}*/
+
+		vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
+		//jump_coolddown.Start();
+	}
+
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
+
+	/*float jump_cooldown_calc = 0.0f;
+	jump_cooldown_calc = JUMP_COOLDOWN - jump_coolddown.Read() * 0.001f;
+	if (jump_cooldown_calc < 0)
+		jump_cooldown_calc = 0;*/
 
 	//mat4x4 decorMatrix;
 	//decorBody->GetTransform(&decorMatrix);
