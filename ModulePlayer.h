@@ -34,6 +34,7 @@ public:
 	float brake;
 	int delay = 0;
 	int seconds = 0;
+	int minutes = 0;
 
 	bool inDirt = false;
 

@@ -232,6 +232,12 @@ update_status ModulePlayer::Update(float dt)
 		seconds++;
 	}
 
+	if (seconds == 60)
+	{
+		seconds = 0;
+		minutes++;
+	}
+
 
 
 	//AIR CONTROL
@@ -259,7 +265,7 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h      Total Time %d s", vehicle->GetKmh(), seconds);
+	sprintf_s(title, "%.1f Km/h       Total Time: %d m %d s", vehicle->GetKmh(),minutes, seconds);
 	App->window->SetTitle(title);
 
 	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
