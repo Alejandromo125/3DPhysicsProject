@@ -111,7 +111,8 @@ bool ModulePlayer::Start()
 	vehicle->SetPos(0, 5, 0);
 
 	
-	vehicle->collision_listeners.add(this);
+	//vehicle->collision_listeners.add(this);
+	vehicle->collision_listeners.add(App->scene_intro);
 
 	//App->physics->AddConstraintP2P(*decorBody->body, *vehicle->body, car.rear_chassis_offset, car.rear_chassis_offset);
 	

@@ -31,16 +31,42 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(0.0f, 4.0f, -12.0f));
 	App->camera->LookAt(vec3(0, 3, 0));
 
+    // Lap barrier
+    geometryList.add(CreateCube(vec3(-15.0f, 5.0f, 15.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_L", false));
+    geometryList.add(CreateCube(vec3(15.0f, 5.0f, 15.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_R", false));
+    geometryList.add(CreateCube(vec3(0.0f, 11.0f, 15.0f), vec3(32.0f, 2.0f, 2.0f), White, 0, "Barrier_Lap_T", false));
+    geometryList.add(CreateCube(vec3(0.0f, 11.0f, 15.0f), vec3(32.0f, 2.0f, 2.0f), White, 0, "Barrier_Lap_Sensor", true));
+
+    // General setup
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, -140.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 0", false));
+
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 110.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 1", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 360.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 2", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 610.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 3", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 860.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 4", false));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1110.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 5", false));
 
-    geometryList.add(CreateCube(vec3(-15.0f, 0.0f, 465.0f), vec3(1.0f, 5.6f, 1020.0f), Black, 0, "Left_Railing", false));
-    geometryList.add(CreateCube(vec3(15.0f, 0.0f, 450.0f), vec3(1.0f, 5.6f, 1020.0f), Black, 0, "Right_Railing", false));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1360.0f), vec3(30.0f, 50.6f, 2.0f), Black, 0, "Portal", true));
 
-    geometryList.add(CreateCube(vec3(-16.0f, 0.0f, 465.0f), vec3(1.0f, 500.0f, 1020.0f), Invisible, 0, "Inv_Limit", false));
-    geometryList.add(CreateCube(vec3(16.0f, 0.0f, 450.0f), vec3(1.0f, 500.0f, 1020.0f), Invisible, 0, "Inv_Limit", false));
+    geometryList.add(CreateCube(vec3(-15.0f, 5.0f, 1470.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_L", false));
+    geometryList.add(CreateCube(vec3(15.0f, 5.0f, 1470.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_R", false));
+    geometryList.add(CreateCube(vec3(0.0f, 11.0f, 1470.0f), vec3(32.0f, 2.0f, 2.0f), White, 0, "Barrier_Lap_T", false));
+
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1360.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 6", false));
+
+    geometryList.add(CreateCube(vec3(-15.0f, 0.0f, 465.0f), vec3(1.0f, 6.5f, 2560.0f), Black, 0, "Left_Railing", false));
+    geometryList.add(CreateCube(vec3(15.0f, 0.0f, 465.0f), vec3(1.0f, 6.5f, 2560.0f), Black, 0, "Right_Railing", false));
+
+    geometryList.add(CreateCube(vec3(-16.0f, 0.0f, 465.0f), vec3(1.0f, 500.0f, 1560.0f), Invisible, 0, "Inv_Limit", false));
+    geometryList.add(CreateCube(vec3(16.0f, 0.0f, 465.0f), vec3(1.0f, 500.0f, 1560.0f), Invisible, 0, "Inv_Limit", false));
+
+    // Teleports
+
+    // Obstacles
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 100.0f), vec3(30.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
+
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 110.0f), vec3(30.0f, 0.5f, 15.0f), Grey, 0, "Dirt_Slower", false));
+    
 
 	//geometryList.add(CreateCube(vec3(-181.0f, 6.5f, -411.212f), vec3(1.0f, 13.0f, 815.0f), Blue, 0, "wall1"));
 	//geometryList.add(CreateCube(vec3(-151.028f, 6.5f, -394.152f), vec3(1.0f, 13.0f, 719.176f), Blue, 0, "wall2"));
@@ -61,7 +87,9 @@ update_status ModuleSceneIntro::Update(float dt)
 {
 	//Plane p(0, 1, 0, 0);
 	//p.axis = true;
-	//p.Render();	
+	//p.Render();
+
+
 
 
     display(dt);
