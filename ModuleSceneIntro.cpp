@@ -273,7 +273,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
         {
             App->player->inDirt = true;
         }
-        else App->player->inDirt = false;
+        //else App->player->inDirt = false;
 
         if (body2->name == "Portal_End")
         {
@@ -283,6 +283,35 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
         {
             App->player->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), 1315);
         }
+    }
+
+    if (body2->name == "Ground Part -1")
+    {
+        App->player->inDirt = false;
+    }
+    if (body2->name == "Ground Part 0")
+    {
+        App->player->inDirt = false;
+    }
+    if (body2->name == "Ground Part 1")
+    {
+        App->player->inDirt = false;
+    }
+    if (body2->name == "Ground Part 2")
+    {
+        App->player->inDirt = false;
+    }
+    if (body2->name == "Ground Part 3")
+    {
+        App->player->inDirt = false;
+    }
+    if (body2->name == "Ground Part 4")
+    {
+        App->player->inDirt = false;
+    }
+    if (body2->name == "Ground Part 5")
+    {
+        App->player->inDirt = false;
     }
 }
 
