@@ -7,50 +7,34 @@
 #include "ModuleCamera3D.h"
 #include "Timer.h"
 
-ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
+ModulePlayer2::ModulePlayer2(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
 	jump_coolddown.Start();
 }
 
-ModulePlayer::~ModulePlayer()
+ModulePlayer2::~ModulePlayer2()
 {}
 
 // Load assets
-bool ModulePlayer::Start()
+bool ModulePlayer2::Start()
 {
 	LOG("Loading player");
 
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
-	car.chassis_size.Set(3.2, 0.6, 7);
-	car.chassis2_size.Set(2.5, 1.7, 3.2);
+	car.chassis_size.Set(0.85, 2, 4.5);
+	car.chassis2_size.Set(1.3, 2, 1.5);
 	car.chassis3_size.Set(1, 1.4, 1.3);
-	car.chassis4_size.Set(3.2, 0.8, 6.5);
+	car.chassis4_size.Set(1.25, 1, 1);
+	car.chassis10_size.Set(2.5, 0.4, 0.6);
 
-	car.chassis_offset.Set(0, 0.5, 0);
-	car.chassis2_offset.Set(0, 1, -1);
+	car.chassis_offset.Set(0, 1, 0);
+	car.chassis2_offset.Set(0, 1.8, -0.2);
 	car.chassis3_offset.Set(0, 0.7, 1.8);
-	car.chassis4_offset.Set(0, 0.5, 0);
-
-	//car.chassis_size.Set(3, 1.5, 6);
-	//car.chassis_offset.Set(0, 1.5, 0);
-	//car.chassis2_size.Set(3, 0.25, 3);
-	//car.chassis2_offset.Set(0, 4, -1.5);
-	//car.chassis3_size.Set(0.5, 0.5, 0.5);
-	//car.chassis3_offset.Set(1, 1.5, 3);
-	//car.chassis4_size.Set(0.5, 0.5, 0.5);
-	//car.chassis4_offset.Set(-1, 1.5, 3);
-	//car.chassis5_size.Set(0.25, 1.7, 0.25);
-	//car.chassis5_offset.Set(1.38, 3.09, -2.88);
-	//car.chassis6_size.Set(0.25, 1.7, 0.25);
-	//car.chassis6_offset.Set(1.38, 3.09, -0.12);
-	//car.chassis7_size.Set(0.25, 1.7, 0.25);
-	//car.chassis7_offset.Set(-1.38, 3.09, -2.88);
-	//car.chassis8_size.Set(0.25, 1.7, 0.25);
-	//car.chassis8_offset.Set(-1.38, 3.09, -0.12);
-
+	car.chassis4_offset.Set(0, 2.2, -2.4);
+	car.chassis10_offset.Set(0, 2.1, 2.3);
 
 	car.mass = 130.0f;
 	car.suspensionStiffness = 26.10f;
@@ -68,17 +52,17 @@ bool ModulePlayer::Start()
 
 	// Don't change anything below this line ------------------
 
-	float half_width = car.chassis_size.x*0.5f;
-	float half_length = car.chassis_size.z*0.5f;
-	
-	vec3 direction(0,-1,0);
-	vec3 axis(-1,0,0);
-	
+	float half_width = car.chassis_size.x * 0.65f;
+	float half_length = car.chassis_size.z * 0.65f;
+
+	vec3 direction(0, -1, 0);
+	vec3 axis(-1, 0, 0);
+
 	car.num_wheels = 4;
 	car.wheels = new Wheel[4];
 
 	// FRONT-LEFT ------------------------
-	car.wheels[0].connection.Set(half_width - 0.2f * wheel_width, connection_height, half_length - wheel_radius);
+	car.wheels[0].connection.Set(half_width - 0.6f * wheel_width, connection_height, half_length - wheel_radius);
 	car.wheels[0].direction = direction;
 	car.wheels[0].axis = axis;
 	car.wheels[0].suspensionRestLength = suspensionRestLength;
@@ -90,7 +74,7 @@ bool ModulePlayer::Start()
 	car.wheels[0].steering = true;
 
 	// FRONT-RIGHT ------------------------
-	car.wheels[1].connection.Set(-half_width + 0.2f * wheel_width, connection_height, half_length - wheel_radius);
+	car.wheels[1].connection.Set(-half_width + 0.6f * wheel_width, connection_height, half_length - wheel_radius);
 	car.wheels[1].direction = direction;
 	car.wheels[1].axis = axis;
 	car.wheels[1].suspensionRestLength = suspensionRestLength;
@@ -102,7 +86,7 @@ bool ModulePlayer::Start()
 	car.wheels[1].steering = true;
 
 	// REAR-LEFT ------------------------
-	car.wheels[2].connection.Set(half_width - 0.2f * wheel_width, connection_height, -half_length + wheel_radius);
+	car.wheels[2].connection.Set(half_width - 0.6f * wheel_width, connection_height, -half_length + wheel_radius);
 	car.wheels[2].direction = direction;
 	car.wheels[2].axis = axis;
 	car.wheels[2].suspensionRestLength = suspensionRestLength;
@@ -114,7 +98,7 @@ bool ModulePlayer::Start()
 	car.wheels[2].steering = false;
 
 	// REAR-RIGHT ------------------------
-	car.wheels[3].connection.Set(-half_width + 0.2f * wheel_width, connection_height, -half_length + wheel_radius);
+	car.wheels[3].connection.Set(-half_width + 0.6f * wheel_width, connection_height, -half_length + wheel_radius);
 	car.wheels[3].direction = direction;
 	car.wheels[3].axis = axis;
 	car.wheels[3].suspensionRestLength = suspensionRestLength;
@@ -126,9 +110,9 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 5, 0);
+	vehicle->SetPos(4, 5, 0);
 
-	
+
 	//vehicle->collision_listeners.add(this);
 	vehicle->collision_listeners.add(App->scene_intro);
 
@@ -140,12 +124,12 @@ bool ModulePlayer::Start()
 	//App->physics->AddConstraintP2P(*decorBody->body, *vehicle->body, car.rear_chassis_offset, car.rear_chassis_offset);
 
 	inDirt = false;
-	
+
 	return true;
 }
 
 // Unload assets
-bool ModulePlayer::CleanUp()
+bool ModulePlayer2::CleanUp()
 {
 	LOG("Unloading player");
 
@@ -153,11 +137,11 @@ bool ModulePlayer::CleanUp()
 }
 
 // Update: draw background
-update_status ModulePlayer::Update(float dt)
+update_status ModulePlayer2::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
 
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && (vehicle->GetKmh() < 120))
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && (vehicle->GetKmh() < 120))
 	{
 		acceleration = MAX_ACCELERATION;
 	}
@@ -184,16 +168,32 @@ update_status ModulePlayer::Update(float dt)
 		}
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	Euler angles = vehicle->GetEulerAngles(vehicle->vehicle->getChassisWorldTransform().getRotation());
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES;
-	}
+		
 
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		if (turn < TURN_DEGREES)
+		{
+			turn += TURN_DEGREES;
+			angles.yaw -= (DEGTORAD * 1.1);
+			btQuaternion q;
+			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
+			vehicle->SetRotation(q);
+		}
+			
+	}
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		if(turn > -TURN_DEGREES)
+		if (turn > -TURN_DEGREES)
+		{
 			turn -= TURN_DEGREES;
+			angles.yaw += (DEGTORAD * 1.1);
+			btQuaternion q;
+			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
+			vehicle->SetRotation(q);
+		}
+			
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
@@ -217,7 +217,7 @@ update_status ModulePlayer::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 	{
-		acceleration= -MAX_ACCELERATION;
+		acceleration = -MAX_ACCELERATION;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -275,7 +275,7 @@ update_status ModulePlayer::Update(float dt)
 		winCondition = true;
 	}
 
-	if (lapDone == true )
+	if (lapDone == true)
 	{
 		lastSeconds = seconds;
 		lastMinutes = minutes;
@@ -287,7 +287,7 @@ update_status ModulePlayer::Update(float dt)
 	{
 		if (vehicle->GetKmh() > 50)
 		{
-			vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()+400.0f));
+			vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh() + 400.0f));
 		}
 	}
 
@@ -321,7 +321,7 @@ update_status ModulePlayer::Update(float dt)
 			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
 			vehicle->SetRotation(q);
 		}
-		
+
 	}
 	if (PositionInTheAir.getY() < -2)
 	{
@@ -336,6 +336,7 @@ update_status ModulePlayer::Update(float dt)
 
 		vehicle->SetLinearVelocity(0, 0, 0);
 	}
+
 	char title[80];
 	if (winCondition == false)
 	{
@@ -346,7 +347,7 @@ update_status ModulePlayer::Update(float dt)
 	{
 		sprintf_s(title, "Your Final Time: %d m %d s", minutes, seconds);
 	}
-	
+
 	App->window->SetTitle(title);
 
 	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();

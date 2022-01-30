@@ -83,7 +83,7 @@ void PhysVehicle3D::Render()
 	btQuaternion q5 = vehicle->getChassisWorldTransform().getRotation();
 	btVector3 offset5(info.chassis5_offset.x, info.chassis5_offset.y, info.chassis5_offset.z);
 	offset5 = offset5.rotate(q5.getAxis(), q5.getAngle());
-	chassis5.color = Blue;
+	chassis5.color = White;
 	chassis5.transform.M[12] += offset5.getX();
 	chassis5.transform.M[13] += offset5.getY();
 	chassis5.transform.M[14] += offset5.getZ();

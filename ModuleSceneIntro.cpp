@@ -104,7 +104,7 @@ bool ModuleSceneIntro::Start()
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 856.0f), vec3(30.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 865.0f), vec3(30.0f, 0.5f, 10.0f), Grey, 0, "Dirt_Slower", false));
-   geometryList.add(CreateCube(vec3(0.0f, 0.0f, 865.0f), vec3(30.0f, 500.0f, 10.0f), Grey, 0, "Dirt_Slower_Sensor", true));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 865.0f), vec3(30.0f, 500.0f, 10.0f), Grey, 0, "Dirt_Slower_Sensor", true));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 876.0f), vec3(30.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
 
 
