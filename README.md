@@ -16,8 +16,7 @@ Link to the project: https://github.com/Alejandromo125/3DPhysicsProject
 * LEFT/RIGHT Arrow Keys to control the car direction (while in ground)
 * LEFT/RIGHT Arrow Keys to make the car flip around (while in air)
 * SPACE BAR to jump
-* Number Keys 1 and 2 to select vehicle (only available during initial countdown)
 
 ## Game Features
-The game consists on an infinite road fuymed by a seamless teleport where you have to drive your chosen vehicle as fast as possible i order to complete 4 laps.
+The game consists on an infinite road fuymed by a seamless teleport where you have to drive your car as fast as possible i order to complete 4 laps.
 Once completed, your final time score will appear on the window title banner. If you are too slow and the music ends before you complete the 4 laps, you will loose.
