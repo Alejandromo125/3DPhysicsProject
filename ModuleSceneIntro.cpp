@@ -231,7 +231,7 @@ bool ModuleSceneIntro::Start()
     sceneEndTimer = 0;
 
     trueLooseCondition = false;
-    countDownTimer = 18720;
+    countDownTimer = 18820;
 
     vehicleIndex = 1;
 
@@ -282,9 +282,10 @@ update_status ModuleSceneIntro::Update(float dt)
 
     if (countDownTimer <= 0)
     {
-        trueLooseCondition = true;
+        Mix_PauseMusic();
+        if(App->player->winCondition == false && App->player2->winCondition == false) trueLooseCondition = true;
 
-        if(countDownTimer < 0 && countDownTimer >= -1) App->audio->PlayFx(gameEndLoose);
+        if(countDownTimer < 0 && countDownTimer >= -1 && trueLooseCondition == true) App->audio->PlayFx(gameEndLoose);
     }
 
     display(dt);
