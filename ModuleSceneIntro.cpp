@@ -35,7 +35,7 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(-15.0f, 5.0f, 15.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_L", false));
     geometryList.add(CreateCube(vec3(15.0f, 5.0f, 15.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_R", false));
     geometryList.add(CreateCube(vec3(0.0f, 11.0f, 15.0f), vec3(32.0f, 2.0f, 2.0f), White, 0, "Barrier_Lap_T", false));
-    geometryList.add(CreateCube(vec3(0.0f, 11.0f, 15.0f), vec3(32.0f, 2.0f, 2.0f), White, 0, "Barrier_Lap_Sensor", true));
+    geometryList.add(CreateCube(vec3(0.0f, 11.0f, 15.0f), vec3(32.0f, 500.0f, 2.0f), White, 0, "Barrier_Lap_Sensor", true));
 
     // General setup
     geometryList.add(CreateRamp(vec3(0.0f, 0.0f, -120.0f), vec3(30.0f, 1.0f, 25.0f), Red, -15.0f, { 1,0,0 }, "Ramp_Obstacle", 0, false));
