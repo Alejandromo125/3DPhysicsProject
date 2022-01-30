@@ -145,7 +145,7 @@ update_status ModulePlayer2::Update(float dt)
 	{
 		turn = acceleration = brake = 0.0f;
 
-		if ((winCondition == false || looseCondition == false) && App->scene_intro->sceneBeginTimer > 220)
+		if ((winCondition == false && looseCondition == false && App->scene_intro->trueLooseCondition == false) && App->scene_intro->sceneBeginTimer > 220)
 		{
 			if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && (vehicle->GetKmh() < 120))
 			{

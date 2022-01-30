@@ -222,12 +222,16 @@ bool ModuleSceneIntro::Start()
 	//geometryList.add(CreateCube(vec3(-151.028f, 6.5f, -394.152f), vec3(1.0f, 13.0f, 719.176f), Blue, 0, "wall2"));
     
     lap = App->audio->LoadFx("Assets/checkpoint.wav");
-    gameEnd = App->audio->LoadFx("Assets/end.wav");
+    gameEndWin = App->audio->LoadFx("Assets/end.wav");
+    gameEndLoose = App->audio->LoadFx("Assets/endLoose.wav");
     countDown = App->audio->LoadFx("Assets/countdown.wav");
     //jump = App->audio->LoadFx("Assets/countdown.wav");
 
     sceneBeginTimer = 0;
     sceneEndTimer = 0;
+
+    trueLooseCondition = false;
+    countDownTimer = 18720;
 
     vehicleIndex = 1;
 
@@ -245,6 +249,8 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+    countDownTimer--;
+
     sceneBeginTimer++;
     if (App->player->winCondition == true || App->player->looseCondition == true) sceneEndTimer++;
     if (App->player2->winCondition == true || App->player2->looseCondition == true) sceneEndTimer++;
@@ -254,7 +260,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	//p.Render();
     if (sceneBeginTimer <= 1) App->audio->PlayFx(countDown);
 
-    if (sceneEndTimer > 1 && sceneEndTimer <= 3) App->audio->PlayFx(gameEnd);
+    if (sceneEndTimer > 1 && sceneEndTimer <= 3) App->audio->PlayFx(gameEndWin);
 
     if (sceneBeginTimer <= 240)
     {
@@ -272,6 +278,13 @@ update_status ModuleSceneIntro::Update(float dt)
 
             vehicleIndex = 2;
         }
+    }
+
+    if (countDownTimer <= 0)
+    {
+        trueLooseCondition = true;
+
+        if(countDownTimer < 0 && countDownTimer >= -1) App->audio->PlayFx(gameEndLoose);
     }
 
     display(dt);

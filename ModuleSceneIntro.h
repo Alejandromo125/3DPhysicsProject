@@ -43,6 +43,10 @@ public:
 	*/
 	bool lapSensorActivated = false;
 
+	bool trueLooseCondition = false;
+
+	int countDownTimer = 18720;
+
 	PhysBody3D* pb_chassis;
 	Cube p_chassis;
 
@@ -77,7 +81,8 @@ public:
 
 	uint countDown = 0;
 	uint lap = 0;
-	uint gameEnd = 0;
+	uint gameEndWin = 0;
+	uint gameEndLoose = 0;
 	uint jump = 0;
 
 	int sceneBeginTimer = 0;
