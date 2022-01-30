@@ -75,11 +75,11 @@ public:
 	p2DynArray<PhysBody3D*> pb_endlvl;
 	p2DynArray<Cube>s_endlvl;
 
-	int count = 0;
-	int lvlFx = 0;
-	int gameWinFx = 0;
-	int deadFx = 0;
-	int saving = 0;
-	int randomize = 0;
-	int volume = 10;
+	uint countDown = 0;
+	uint lap = 0;
+	uint gameEnd = 0;
+	uint jump = 0;
+
+	int sceneBeginTimer = 0;
+	int sceneEndTimer = 0;
 };

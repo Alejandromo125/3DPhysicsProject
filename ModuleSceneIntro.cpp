@@ -219,6 +219,14 @@ bool ModuleSceneIntro::Start()
 
 	//geometryList.add(CreateCube(vec3(-181.0f, 6.5f, -411.212f), vec3(1.0f, 13.0f, 815.0f), Blue, 0, "wall1"));
 	//geometryList.add(CreateCube(vec3(-151.028f, 6.5f, -394.152f), vec3(1.0f, 13.0f, 719.176f), Blue, 0, "wall2"));
+    
+    lap = App->audio->LoadFx("Assets/checkpoint.wav");
+    gameEnd = App->audio->LoadFx("Assets/end.wav");
+    countDown = App->audio->LoadFx("Assets/countdown.wav");
+    //jump = App->audio->LoadFx("Assets/countdown.wav");
+
+    sceneBeginTimer = 0;
+    sceneEndTimer = 0;
 
 	return ret;
 }
@@ -234,12 +242,17 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+    sceneBeginTimer++;
+    if (App->player->winCondition == true || App->player->looseCondition == true) sceneEndTimer++;
+    //if (App->player2->winCondition == true || App->player2->looseCondition == true) sceneEndTimer++;
+
 	//Plane p(0, 1, 0, 0);
 	//p.axis = true;
 	//p.Render();
 
+    if(sceneBeginTimer <= 1) App->audio->PlayFx(countDown);
 
-
+    if (sceneEndTimer > 1 && sceneEndTimer <= 3) App->audio->PlayFx(gameEnd);
 
     display(dt);
 
@@ -267,16 +280,18 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
         if (body2->name == "Barrier_Lap_Sensor_Activator")
         {
-
             lapSensorActivated = true;
-            
-            
         }
 
         if (body2->name == "Barrier_Lap_Sensor")
         {
-            if(lapSensorActivated == true) App->player->lapDone = true; 
-            if (lapSensorActivated == true) lapSensorActivated = false;
+            if (lapSensorActivated == true)
+            {
+                App->player->lapDone = true;
+                lapSensorActivated = false;
+
+                App->audio->PlayFx(lap);
+            }
         }
 
         if (body2->name == "Dirt_Slower_Sensor")
