@@ -255,7 +255,7 @@ update_status ModulePlayer::Update(float dt)
 		winCondition = true;
 	}
 
-	if (winCondition == true)
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
 		lastSeconds = seconds;
 		lastMinutes = minutes;
@@ -315,7 +315,7 @@ update_status ModulePlayer::Update(float dt)
 	char title[80];
 	if (winCondition == false)
 	{
-		sprintf_s(title, "%.1f Km/h       Total Time: %d m %d s      Your Last Time: %d m %d s", vehicle->GetKmh(), minutes, seconds, lastSeconds, lastMinutes);
+		sprintf_s(title, "%.1f Km/h       Total Time: %d m %d s      Your Last Time: %d m %d s", vehicle->GetKmh(), minutes, seconds, lastMinutes, lastSeconds);
 	}
 
 	if (winCondition == true)
