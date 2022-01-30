@@ -261,6 +261,22 @@ update_status ModulePlayer::Update(float dt)
 		lastMinutes = minutes;
 	}
 
+	if (inDirt == true)
+	{
+		if (vehicle->GetKmh() > 50)
+		{
+			vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()));
+		}
+	}
+
+	if (inDirt == false)
+	{
+		if (vehicle->GetKmh() > 120)
+		{
+			vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()));
+		}
+	}
+
 
 	//AIR CONTROL
 	btVector3 PositionInTheAir;
