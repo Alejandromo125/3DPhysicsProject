@@ -4,6 +4,7 @@
 #include "ModuleCamera3D.h"
 #include "ModulePlayer.h"
 #include "PhysVehicle3D.h"
+#include "ModuleSceneIntro.h"
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -100,8 +101,9 @@ update_status ModuleCamera3D::Update(float dt)
 	else
 	{
 		mat4x4 matrix;
-		App->player->vehicle->GetTransform(&matrix);
-		
+		if(App->scene_intro->vehicleIndex == 1) App->player->vehicle->GetTransform(&matrix);
+		if (App->scene_intro->vehicleIndex == 2) App->player2->vehicle->GetTransform(&matrix);
+
 		Position = matrix.translation();
 
 		X = vec3{ matrix[0], matrix[1], matrix[2] };

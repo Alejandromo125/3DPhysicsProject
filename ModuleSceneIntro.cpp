@@ -1,5 +1,6 @@
 #include "Globals.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "PhysVehicle3D.h"
 #include "Application.h"
 #include "ModuleSceneIntro.h"
@@ -228,6 +229,8 @@ bool ModuleSceneIntro::Start()
     sceneBeginTimer = 0;
     sceneEndTimer = 0;
 
+    vehicleIndex = 1;
+
 	return ret;
 }
 
@@ -244,15 +247,32 @@ update_status ModuleSceneIntro::Update(float dt)
 {
     sceneBeginTimer++;
     if (App->player->winCondition == true || App->player->looseCondition == true) sceneEndTimer++;
-    //if (App->player2->winCondition == true || App->player2->looseCondition == true) sceneEndTimer++;
+    if (App->player2->winCondition == true || App->player2->looseCondition == true) sceneEndTimer++;
 
 	//Plane p(0, 1, 0, 0);
 	//p.axis = true;
 	//p.Render();
-
-    if(sceneBeginTimer <= 1) App->audio->PlayFx(countDown);
+    if (sceneBeginTimer <= 1) App->audio->PlayFx(countDown);
 
     if (sceneEndTimer > 1 && sceneEndTimer <= 3) App->audio->PlayFx(gameEnd);
+
+    if (sceneBeginTimer <= 240)
+    {
+        if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && vehicleIndex != 1)
+        {
+            App->player->vehicle->SetPos(App->player2->currentPlayerPosition.x(), App->player2->currentPlayerPosition.y(), App->player2->currentPlayerPosition.z());
+            App->player->vehicle->SetLinearVelocity(0, 0, 0);
+
+            vehicleIndex = 1;
+        }
+        if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && vehicleIndex != 2)
+        {
+            App->player2->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), App->player->currentPlayerPosition.z());
+            App->player2->vehicle->SetLinearVelocity(0, 0, 0);
+
+            vehicleIndex = 2;
+        }
+    }
 
     display(dt);
 
@@ -411,6 +431,90 @@ void ModuleSceneIntro::display(float dt)
     //p.Render();
 
     //l.Render();
+
+    Cube trafficLight1(2.0f, 2.0f, 2.0f);
+    trafficLight1.SetPos(4.0f, 8.0f, 15.0f);
+    trafficLight1.axis = false;
+
+    Cube trafficLight2(2.0f, 2.0f, 2.0f);
+    trafficLight2.SetPos(0.0f, 8.0f, 15.0f);
+    trafficLight2.axis = false;
+
+    Cube trafficLight3(2.0f, 2.0f, 2.0f);
+    trafficLight3.SetPos(-4.0f, 8.0f, 15.0f);
+    trafficLight3.axis = false;
+    
+
+    if (sceneBeginTimer <= 1)
+    {
+        trafficLight1.color = Dark_Grey;
+        trafficLight2.color = Dark_Grey;
+        trafficLight3.color = Dark_Grey;
+
+        trafficLight1.Render();
+        trafficLight2.Render();
+        trafficLight3.Render();
+    }
+    else if (sceneBeginTimer <= 60)
+    {
+        trafficLight1.color = Red;
+        trafficLight2.color = Dark_Grey;
+        trafficLight3.color = Dark_Grey;
+
+        trafficLight1.Render();
+        trafficLight2.Render();
+        trafficLight3.Render();
+    }
+    else if (sceneBeginTimer <= 120)
+    {
+        trafficLight1.color = Red;
+        trafficLight2.color = Red;
+        trafficLight3.color = Dark_Grey;
+
+        trafficLight1.Render();
+        trafficLight2.Render();
+        trafficLight3.Render();
+    }
+    else if (sceneBeginTimer <= 180)
+    {
+        trafficLight1.color = Red;
+        trafficLight2.color = Red;
+        trafficLight3.color = Red;
+
+        trafficLight1.Render();
+        trafficLight2.Render();
+        trafficLight3.Render();
+    }
+    else if (sceneBeginTimer <= 240)
+    {
+        trafficLight1.color = Green;
+        trafficLight2.color = Green;
+        trafficLight3.color = Green;
+
+        trafficLight1.Render();
+        trafficLight2.Render();
+        trafficLight3.Render();
+    }
+    else if (sceneBeginTimer > 240)
+    {
+        trafficLight1.color = Green;
+        trafficLight2.color = Green;
+        trafficLight3.color = Green;
+
+        trafficLight1.Render();
+        trafficLight2.Render();
+        trafficLight3.Render();
+    }
+    else if (App->player->winCondition == true || App->player->looseCondition == true || App->player2->winCondition == true || App->player2->looseCondition == true)
+    {
+        trafficLight1.color = Blue;
+        trafficLight2.color = Blue;
+        trafficLight3.color = Blue;
+
+        trafficLight1.Render();
+        trafficLight2.Render();
+        trafficLight3.Render();
+    }
 
     p2List_item<Cube*>* itemCubes = geometryList.getFirst();
 

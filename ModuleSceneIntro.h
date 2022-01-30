@@ -82,4 +82,6 @@ public:
 
 	int sceneBeginTimer = 0;
 	int sceneEndTimer = 0;
+
+	int vehicleIndex = 1;
 };

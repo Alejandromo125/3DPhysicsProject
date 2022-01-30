@@ -155,55 +155,57 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	turn = acceleration = brake = 0.0f;
-
-	if ((winCondition == false || looseCondition == false) && App->scene_intro->sceneBeginTimer > 240)
+	if (App->scene_intro->vehicleIndex == 1)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && (vehicle->GetKmh() < 120))
-		{
-			acceleration = MAX_ACCELERATION;
-		}
+		turn = acceleration = brake = 0.0f;
 
-		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && (vehicle->GetKmh() > -30))
+		if ((winCondition == false || looseCondition == false) && App->scene_intro->sceneBeginTimer > 220)
 		{
-			if (vehicle->GetKmh() > 10)
+			if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && (vehicle->GetKmh() < 120))
 			{
-				brake = BRAKE_POWER / 24;
+				acceleration = MAX_ACCELERATION;
 			}
 
-			else
+			if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && (vehicle->GetKmh() > -30))
 			{
-
-				if (vehicle->GetKmh() < -30)
+				if (vehicle->GetKmh() > 10)
 				{
-					acceleration = MAX_ACCELERATION * 5;
+					brake = BRAKE_POWER / 24;
 				}
-				acceleration = -MAX_ACCELERATION * 5;
+
+				else
+				{
+
+					if (vehicle->GetKmh() < -30)
+					{
+						acceleration = MAX_ACCELERATION * 5;
+					}
+					acceleration = -MAX_ACCELERATION * 5;
+				}
 			}
-		}
 
-		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		{
-			if (turn < TURN_DEGREES)
-				turn += TURN_DEGREES;
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		{
-			if (turn > -TURN_DEGREES)
-				turn -= TURN_DEGREES;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		{
-			if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
+			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 			{
-				vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
-				jump_coolddown.Start();
+				if (turn < TURN_DEGREES)
+					turn += TURN_DEGREES;
 			}
 
+			if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			{
+				if (turn > -TURN_DEGREES)
+					turn -= TURN_DEGREES;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+			{
+				if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
+				{
+					vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
+					jump_coolddown.Start();
+				}
+
+			}
 		}
-	}
-		
+
 
 		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 		{
@@ -215,11 +217,12 @@ update_status ModulePlayer::Update(float dt)
 			tr.rotate(0, vec3(0, 1, 0));
 			vehicle->vehicle->getRigidBody()->setAngularVelocity(btVector3(0, 0, 0));
 			vehicle->SetTransform(&tr);
+			
 
 			vehicle->SetLinearVelocity(0, 0, 0);
 		}
 
-		
+
 
 		vehicle->ApplyEngineForce(acceleration);
 		vehicle->Turn(turn);
@@ -245,7 +248,7 @@ update_status ModulePlayer::Update(float dt)
 			tiemer_milisec_read = 0;
 		}
 
-		if(winCondition==false || looseCondition==false)delay++;
+		if (winCondition == false || looseCondition == false)delay++;
 
 		if ((delay % 60) == 0 && winCondition == false)
 		{
@@ -257,7 +260,7 @@ update_status ModulePlayer::Update(float dt)
 			seconds = 0;
 			minutes++;
 		}
-		if (winCondition == true || looseCondition==true)
+		if (winCondition == true || looseCondition == true)
 		{
 			seconds = seconds;
 			minutes = minutes;
@@ -352,33 +355,34 @@ update_status ModulePlayer::Update(float dt)
 
 			vehicle->SetLinearVelocity(0, 0, 0);
 		}
-		
-	
-	char title[80];
-	if (minutes == 4 && seconds == 0)
-	{
-		looseCondition == true;
-		sprintf(title, "You have lost the race");
-	}
-	if (winCondition == false)
-	{
-		sprintf_s(title, "%.1f Km/h       Your Current Time: %d m %d s      Your Last Time: %d m %d s", vehicle->GetKmh(), minutes, seconds, lastMinutes, lastSeconds);
-	}
 
-	if (winCondition == true)
-	{
-		sprintf_s(title, "Your Final Time: %d m %d s", minutes, seconds);
-	}
-	if (winCondition == true)
-	{
-		if (vehicle->GetKmh() > 0)
+
+		char title[80];
+		if (minutes == 4 && seconds == 0)
 		{
-			vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()+1000.0f));
+			looseCondition == true;
+			sprintf(title, "You have lost the race");
 		}
-	}
-	App->window->SetTitle(title);
+		if (winCondition == false)
+		{
+			sprintf_s(title, "%.1f Km/h       Your Current Time: %d m %d s      Your Last Time: %d m %d s", vehicle->GetKmh(), minutes, seconds, lastMinutes, lastSeconds);
+		}
 
-	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
+		if (winCondition == true)
+		{
+			sprintf_s(title, "Your Final Time: %d m %d s", minutes, seconds);
+		}
+		if (winCondition == true)
+		{
+			if (vehicle->GetKmh() > 0)
+			{
+				vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh() + 1000.0f));
+			}
+		}
+		App->window->SetTitle(title);
+
+		currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
+	}
 
 	
 	return UPDATE_CONTINUE;

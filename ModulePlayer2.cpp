@@ -5,6 +5,7 @@
 #include "PhysVehicle3D.h"
 #include "PhysBody3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleSceneIntro.h"
 #include "Timer.h"
 
 ModulePlayer2::ModulePlayer2(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
@@ -20,7 +21,7 @@ ModulePlayer2::~ModulePlayer2()
 bool ModulePlayer2::Start()
 {
 	LOG("Loading player");
-	/*
+	
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
@@ -124,7 +125,7 @@ bool ModulePlayer2::Start()
 	//App->physics->AddConstraintP2P(*decorBody->body, *vehicle->body, car.rear_chassis_offset, car.rear_chassis_offset);
 
 	inDirt = false;
-	*/
+	
 	return true;
 }
 
@@ -139,222 +140,235 @@ bool ModulePlayer2::CleanUp()
 // Update: draw background
 update_status ModulePlayer2::Update(float dt)
 {
-/*
-	turn = acceleration = brake = 0.0f;
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && (vehicle->GetKmh() < 120))
+	if (App->scene_intro->vehicleIndex == 2)
 	{
-		acceleration = MAX_ACCELERATION;
-	}
+		turn = acceleration = brake = 0.0f;
 
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && (vehicle->GetKmh() > -30))
-	{
-		if (vehicle->GetKmh() > 10)
+		if ((winCondition == false || looseCondition == false) && App->scene_intro->sceneBeginTimer > 220)
 		{
-			brake = BRAKE_POWER / 24;
-		}
-
-		else
-		{
-			
-
-			if (vehicle->GetKmh() < -30)
+			if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && (vehicle->GetKmh() < 120))
 			{
-				acceleration = MAX_ACCELERATION * 5;
+				acceleration = MAX_ACCELERATION;
 			}
-			acceleration = -MAX_ACCELERATION * 5;
+
+			if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && (vehicle->GetKmh() > -30))
+			{
+				if (vehicle->GetKmh() > 10)
+				{
+					brake = BRAKE_POWER / 24;
+				}
+
+				else
+				{
+
+					if (vehicle->GetKmh() < -30)
+					{
+						acceleration = MAX_ACCELERATION * 5;
+					}
+					acceleration = -MAX_ACCELERATION * 5;
+				}
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			{
+				if (turn < TURN_DEGREES)
+					turn += TURN_DEGREES;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			{
+				if (turn > -TURN_DEGREES)
+					turn -= TURN_DEGREES;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+			{
+				if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
+				{
+					vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
+					jump_coolddown.Start();
+				}
+
+			}
 		}
-	}
 
-	Euler angles = vehicle->GetEulerAngles(vehicle->vehicle->getChassisWorldTransform().getRotation());
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		
 
-		if (turn < TURN_DEGREES)
+		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 		{
-			turn += TURN_DEGREES;
-			angles.yaw -= (DEGTORAD * 1.1);
-			btQuaternion q;
-			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
-			vehicle->SetRotation(q);
-		}
-			
-	}
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		if (turn > -TURN_DEGREES)
-		{
-			turn -= TURN_DEGREES;
-			angles.yaw += (DEGTORAD * 1.1);
-			btQuaternion q;
-			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
-			vehicle->SetRotation(q);
-		}
-			
-	}
+			App->scene_intro->lapSensorActivated = false;
 
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-	{
-		App->scene_intro->lapSensorActivated = false;
+			App->player->vehicle->SetPos(initialPosition.x(), initialPosition.y(), initialPosition.z());
 
-		App->player->vehicle->SetPos(initialPosition.x(), initialPosition.y(), initialPosition.z());
+			mat4x4 tr;
+			tr.rotate(0, vec3(0, 1, 0));
+			vehicle->vehicle->getRigidBody()->setAngularVelocity(btVector3(0, 0, 0));
+			vehicle->SetTransform(&tr);
 
-		mat4x4 tr;
-		tr.rotate(0, vec3(0, 1, 0));
-		vehicle->vehicle->getRigidBody()->setAngularVelocity(btVector3(0, 0, 0));
-		vehicle->SetTransform(&tr);
-
-		vehicle->SetLinearVelocity(0, 0, 0);
-	}
-
-	//if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
-	//{
-	//	brake = BRAKE_POWER;
-	//}
-
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
-	{
-		acceleration = -MAX_ACCELERATION;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-		if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
-		{
-			vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
-			jump_coolddown.Start();
+			vehicle->SetLinearVelocity(0, 0, 0);
 		}
 
-	}
 
-	vehicle->ApplyEngineForce(acceleration);
-	vehicle->Turn(turn);
-	vehicle->Brake(brake);
 
-	if (!App->input->GetKey(SDL_SCANCODE_UP) && !App->input->GetKey(SDL_SCANCODE_DOWN))
-	{
-		vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()));
-	}
+		vehicle->ApplyEngineForce(acceleration);
+		vehicle->Turn(turn);
+		vehicle->Brake(brake);
 
-	//mat4x4 decorMatrix;
-	//decorBody->GetTransform(&decorMatrix);
-	//decor->transform = decorMatrix;
-	vehicle->Render();
-
-	float jump_cooldown_calc = 0.0f;
-	jump_cooldown_calc = JUMP_COOLDOWN - jump_coolddown.Read() * 0.001f;
-	if (jump_cooldown_calc < 0)
-		jump_cooldown_calc = 0;
-
-	int tiemer_milisec_read = 0;
-	//tiemer_milisec_read = game_timer.Read() - chickens_taken * 2000;
-
-	if (tiemer_milisec_read <= 0)
-	{
-		tiemer_milisec_read = 0;
-	}
-
-	delay++;
-
-	if ((delay % 60) == 0 && winCondition == false)
-	{
-		seconds++;
-	}
-
-	if (seconds == 60 && winCondition == false)
-	{
-		seconds = 0;
-		minutes++;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-	{
-		winCondition = true;
-	}
-
-	if (lapDone == true)
-	{
-		lastSeconds = seconds;
-		lastMinutes = minutes;
-		lapDone = false;
-		//NumberOfLaps++;
-	}
-
-	if (inDirt == true)
-	{
-		if (vehicle->GetKmh() > 50)
-		{
-			vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh() + 400.0f));
-		}
-	}
-
-	if (inDirt == false)
-	{
-		if (vehicle->GetKmh() > 120)
+		if (!App->input->GetKey(SDL_SCANCODE_UP) && !App->input->GetKey(SDL_SCANCODE_DOWN))
 		{
 			vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()));
 		}
-	}
 
+		vehicle->Render();
 
-	//AIR CONTROL
-	btVector3 PositionInTheAir;
-	PositionInTheAir = vehicle->vehicle->getChassisWorldTransform().getOrigin();
-	if (PositionInTheAir.getY() > 1)
-	{
-		Euler angles = vehicle->GetEulerAngles(vehicle->vehicle->getChassisWorldTransform().getRotation());
+		float jump_cooldown_calc = 0.0f;
+		jump_cooldown_calc = JUMP_COOLDOWN - jump_coolddown.Read() * 0.001f;
+		if (jump_cooldown_calc < 0)
+			jump_cooldown_calc = 0;
 
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		int tiemer_milisec_read = 0;
+		//tiemer_milisec_read = game_timer.Read() - chickens_taken * 2000;
+
+		if (tiemer_milisec_read <= 0)
 		{
-			angles.yaw -= (DEGTORAD * 4);
-			btQuaternion q;
-			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
-			vehicle->SetRotation(q);
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		{
-			angles.yaw += (DEGTORAD * 4);
-			btQuaternion q;
-			q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
-			vehicle->SetRotation(q);
+			tiemer_milisec_read = 0;
 		}
 
+		if (winCondition == false || looseCondition == false)delay++;
+
+		if ((delay % 60) == 0 && winCondition == false)
+		{
+			seconds++;
+		}
+
+		if (seconds == 60 && winCondition == false)
+		{
+			seconds = 0;
+			minutes++;
+		}
+		if (winCondition == true || looseCondition == true)
+		{
+			seconds = seconds;
+			minutes = minutes;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+		{
+			winCondition = true;
+		}
+
+		if (lap1 == true && lapDone == true)
+		{
+			lastSeconds = seconds;
+			lastMinutes = minutes;
+			lap2 = true;
+			lapDone = false;
+			lap1 = false;
+		}
+		if (lap2 == true && lapDone == true)
+		{
+			lastSeconds = seconds;
+			lastMinutes = minutes;
+			lap3 = true;
+			lapDone = false;
+			lap2 = false;
+		}
+		if (lap3 == true && lapDone == true)
+		{
+			lastSeconds = seconds;
+			lastMinutes = minutes;
+			lap4 = true;
+			lapDone = false;
+			lap3 = false;
+		}
+		if (lap4 == true && lapDone == true)
+		{
+			lastSeconds = seconds;
+			lastMinutes = minutes;
+			winCondition = true;
+			lapDone = false;
+		}
+
+		if (inDirt == true)
+		{
+			if (vehicle->GetKmh() > 50)
+			{
+				vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh() + 400.0f));
+			}
+		}
+
+		if (inDirt == false)
+		{
+			if (vehicle->GetKmh() > 120)
+			{
+				vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()));
+			}
+		}
+
+
+		//AIR CONTROL
+		btVector3 PositionInTheAir;
+		PositionInTheAir = vehicle->vehicle->getChassisWorldTransform().getOrigin();
+		if (PositionInTheAir.getY() > 1)
+		{
+			Euler angles = vehicle->GetEulerAngles(vehicle->vehicle->getChassisWorldTransform().getRotation());
+
+			if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			{
+				angles.yaw -= (DEGTORAD * 4);
+				btQuaternion q;
+				q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
+				vehicle->SetRotation(q);
+			}
+			else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			{
+				angles.yaw += (DEGTORAD * 4);
+				btQuaternion q;
+				q.setEulerZYX(btScalar(angles.yaw), btScalar(angles.pitch), btScalar(angles.roll));
+				vehicle->SetRotation(q);
+			}
+
+		}
+		if (PositionInTheAir.getY() < -2)
+		{
+			App->scene_intro->lapSensorActivated = false;
+
+			App->player->vehicle->SetPos(initialPosition.x(), initialPosition.y(), initialPosition.z());
+
+			mat4x4 tr;
+			tr.rotate(0, vec3(0, 1, 0));
+			vehicle->vehicle->getRigidBody()->setAngularVelocity(btVector3(0, 0, 0));
+			vehicle->SetTransform(&tr);
+
+			vehicle->SetLinearVelocity(0, 0, 0);
+		}
+
+
+		char title[80];
+		if (minutes == 4 && seconds == 0)
+		{
+			looseCondition == true;
+			sprintf(title, "You have lost the race");
+		}
+		if (winCondition == false)
+		{
+			sprintf_s(title, "%.1f Km/h       Your Current Time: %d m %d s      Your Last Time: %d m %d s", vehicle->GetKmh(), minutes, seconds, lastMinutes, lastSeconds);
+		}
+
+		if (winCondition == true)
+		{
+			sprintf_s(title, "Your Final Time: %d m %d s", minutes, seconds);
+		}
+		if (winCondition == true)
+		{
+			if (vehicle->GetKmh() > 0)
+			{
+				vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh() + 1000.0f));
+			}
+		}
+		App->window->SetTitle(title);
+
+		currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 	}
-	if (PositionInTheAir.getY() < -2)
-	{
-		App->scene_intro->lapSensorActivated = false;
 
-		App->player->vehicle->SetPos(initialPosition.x(), initialPosition.y(), initialPosition.z());
-
-		mat4x4 tr;
-		tr.rotate(0, vec3(0, 1, 0));
-		vehicle->vehicle->getRigidBody()->setAngularVelocity(btVector3(0, 0, 0));
-		vehicle->SetTransform(&tr);
-
-		vehicle->SetLinearVelocity(0, 0, 0);
-	}
-
-	char title[80];
-	if (winCondition == false)
-	{
-		sprintf_s(title, "%.1f Km/h       Your Current Time: %d m %d s      Your Last Time: %d m %d s", vehicle->GetKmh(), minutes, seconds, lastMinutes, lastSeconds);
-	}
-
-	if (winCondition == true)
-	{
-		sprintf_s(title, "Your Final Time: %d m %d s", minutes, seconds);
-	}
-
-	App->window->SetTitle(title);
-
-	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
-
-	if (NumberOfLaps == 4)
-	{
-		exit(0);
-	}
-*/
 	return UPDATE_CONTINUE;
 }
 

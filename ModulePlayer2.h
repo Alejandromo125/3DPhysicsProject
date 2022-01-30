@@ -40,8 +40,12 @@ public:
 	int NumberOfLaps = 0;
 	bool winCondition = false;
 	bool lapDone = false;
-
+	bool lap1 = true;
+	bool lap2 = false;
+	bool lap3 = false;
+	bool lap4 = false;
 	bool inDirt = false;
+	bool looseCondition = false;
 
 private:
 
