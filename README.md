@@ -20,4 +20,4 @@ Link to the project: https://github.com/Alejandromo125/3DPhysicsProject
 
 ## Game Features
 The game consists on an infinite road fuymed by a seamless teleport where you have to drive your chosen vehicle as fast as possible i order to complete 4 laps.
-Once completed, your final time score will appear on the window title banner. If you are too slow you will loose.
+Once completed, your final time score will appear on the window title banner. If you are too slow and the music ends before you complete the 4 laps, you will loose.
