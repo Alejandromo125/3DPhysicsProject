@@ -327,7 +327,7 @@ update_status ModulePlayer2::Update(float dt)
 			}
 
 		}
-		if (PositionInTheAir.getY() < -2)
+		else if (PositionInTheAir.getY() < -2)
 		{
 			App->scene_intro->lapSensorActivated = false;
 
@@ -339,6 +339,10 @@ update_status ModulePlayer2::Update(float dt)
 			vehicle->SetTransform(&tr);
 
 			vehicle->SetLinearVelocity(0, 0, 0);
+		}
+		else
+		{
+			vehicle->SetRotation({0, 0,0,1});
 		}
 
 

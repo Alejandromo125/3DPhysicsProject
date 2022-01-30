@@ -322,6 +322,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
             if (lapSensorActivated == true)
             {
                 App->player->lapDone = true;
+                //App->player2->lapDone = true;
                 lapSensorActivated = false;
 
                 App->audio->PlayFx(lap);
@@ -331,46 +332,60 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
         if (body2->name == "Dirt_Slower_Sensor")
         {
             App->player->inDirt = true;
+            App->player2->inDirt = true;
         }
-        if(body2->name=="GroundSensor") App->player->inDirt = false;
+        if (body2->name == "GroundSensor")
+        {
+            App->player->inDirt = false;
+            App->player2->inDirt = false;
+        }
 
         if (body2->name == "Portal_End")
         {
             App->player->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), -95);
+            App->player2->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), -95);
         }
         if (body2->name == "Portal_Beggining")
         {
             App->player->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), 1315);
+            App->player2->vehicle->SetPos(App->player->currentPlayerPosition.x(), App->player->currentPlayerPosition.y(), 1315);
         }
     }
 
     if (body2->name == "Ground Part -1")
     {
         App->player->inDirt = false;
+        App->player2->inDirt = false;
     }
     if (body2->name == "Ground Part 0")
     {
         App->player->inDirt = false;
+        App->player2->inDirt = false;
     }
     if (body2->name == "Ground Part 1")
     {
         App->player->inDirt = false;
+        App->player2->inDirt = false;
     }
     if (body2->name == "Ground Part 2")
     {
         App->player->inDirt = false;
+        App->player2->inDirt = false;
     }
     if (body2->name == "Ground Part 3")
     {
         App->player->inDirt = false;
+        App->player2->inDirt = false;
     }
     if (body2->name == "Ground Part 4")
     {
         App->player->inDirt = false;
+        App->player2->inDirt = false;
     }
     if (body2->name == "Ground Part 5")
     {
         App->player->inDirt = false;
+        App->player2->inDirt = false;
     }
 }
 
