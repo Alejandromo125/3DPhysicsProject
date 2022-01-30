@@ -49,7 +49,7 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 860.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 4", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1110.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 5", false));
 
-    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1360.0f), vec3(30.0f, 50.6f, 2.0f), Black, 0, "Portal", true));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1360.0f), vec3(30.0f, 500.6f, 2.0f), Black, 0, "Portal", true));
 
     geometryList.add(CreateCube(vec3(-15.0f, 5.0f, 1470.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_L", false));
     geometryList.add(CreateCube(vec3(15.0f, 5.0f, 1470.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_R", false));
@@ -78,14 +78,16 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(-5.0f, 0.0f, 320.0f), vec3(15.0f, 0.7f, 50.0f), Grey, 0, "Dirt_Slower", false));
     geometryList.add(CreateCube(vec3(-5.0f, 0.0f, 320.0f), vec3(15.0f, 0.7f, 50.0f), Grey, 0, "Dirt_Slower_Sensor", true));
 
-    geometryList.add(CreateCube(vec3(5.0f, 0.0f, 370.0f), vec3(15.0f, 0.7f, 50.0f), Grey, 0, "Dirt_Slower", false));
-    geometryList.add(CreateCube(vec3(5.0f, 0.0f, 370.0f), vec3(15.0f, 0.7f, 50.0f), Grey, 0, "Dirt_Slower_Sensor", true));
+    geometryList.add(CreateCube(vec3(10.0f, 0.0f, 320.0f), vec3(10.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
+
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1210.0f), vec3(30.0f, 0.7f, 15.0f), Grey, 0, "Dirt_Slower", false));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1210.0f), vec3(30.0f, 0.7f, 15.0f), Grey, 0, "Dirt_Slower_Sensor", true));
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 470.0f), vec3(30.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
-    geometryList.add(CreateCube(vec3(4.0f, 0.0f, 470.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-4.0f, 0.0f, 470.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(12.0f, 0.0f, 470.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-12.0f, 0.0f, 470.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(4.5f, 0.0f, 470.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-4.5f, 0.0f, 470.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(12.5f, 0.0f, 470.0f), vec3(4.0f, 1000.6f, 4.0f), Orange, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-12.5f, 0.0f, 470.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
 
     geometryList.add(CreateCube(vec3(-10.0f, 0.0f, 650.0f), vec3(10.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
     geometryList.add(CreateCube(vec3(10.0f, 0.0f, 650.0f), vec3(10.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
@@ -97,8 +99,8 @@ bool ModuleSceneIntro::Start()
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 720.0f), vec3(10.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
 
-    geometryList.add(CreateCube(vec3(-10.0f, 0.0f, 740.0f), vec3(10.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
-    geometryList.add(CreateCube(vec3(10.0f, 0.0f, 740.0f), vec3(10.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
+    //geometryList.add(CreateCube(vec3(-10.0f, 0.0f, 740.0f), vec3(10.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
+    //geometryList.add(CreateCube(vec3(10.0f, 0.0f, 740.0f), vec3(10.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 856.0f), vec3(30.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 865.0f), vec3(30.0f, 0.5f, 10.0f), Grey, 0, "Dirt_Slower", false));
@@ -107,64 +109,64 @@ bool ModuleSceneIntro::Start()
 
 
     geometryList.add(CreateCube(vec3(20.0f, 0.0f, 50.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-22.0f, 0.0f, 80.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(47.0f, 0.0f, 110.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-40.0f, 0.0f, 120.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(50.0f, 0.0f, 150.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-27.0f, 0.0f, 170.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-7.0f, 0.0f, 140.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-22.0f, 0.0f, 80.0f), vec3(4.0f, 1000.6f, 4.0f), Orange, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(47.0f, 0.0f, 110.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-40.0f, 0.0f, 120.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(50.0f, 0.0f, 150.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-27.0f, 0.0f, 170.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-7.0f, 0.0f, 140.0f), vec3(4.0f, 1000.6f, 4.0f), Orange, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(10.0f, 0.0f, 250.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-10.0f, 0.0f, 200.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-31.0f, 0.0f, 240.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(25.0f, 0.0f, 300.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-50.0f, 0.0f, 320.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 350.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-40.0f, 0.0f, 400.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-10.0f, 0.0f, 200.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-31.0f, 0.0f, 240.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(25.0f, 0.0f, 300.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-50.0f, 0.0f, 320.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 350.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-40.0f, 0.0f, 400.0f), vec3(4.0f, 1000.6f, 4.0f), Orange, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(45.0f, 0.0f, 420.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(5.0f, 0.0f, 420.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-5.0f, 0.0f, 480.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(50.0f, 0.0f, 520.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(5.0f, 0.0f, 420.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-5.0f, 0.0f, 480.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(50.0f, 0.0f, 520.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(45.0f, 0.0f, 580.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-30.0f, 0.0f, 620.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(12.0f, 0.0f, 610.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(40.0f, 0.0f, 680.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-12.0f, 0.0f, 700.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 750.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-30.0f, 0.0f, 620.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(12.0f, 0.0f, 610.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(40.0f, 0.0f, 680.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-12.0f, 0.0f, 700.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 750.0f), vec3(4.0f, 1000.6f, 4.0f), Orange, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(-50.0f, 0.0f, 800.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(40.0f, 0.0f, 820.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(40.0f, 0.0f, 820.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(2.0f, 0.0f, 840.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-2.0f, 0.0f, 870.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-2.0f, 0.0f, 870.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(-56.0f, 0.0f, 900.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(56.0f, 0.0f, 930.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-56.0f, 0.0f, 900.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-40.0f, 0.0f, 970.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(56.0f, 0.0f, 930.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-56.0f, 0.0f, 900.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-40.0f, 0.0f, 970.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(45.0f, 0.0f, 950.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-35.0f, 0.0f, 1000.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(40.0f, 0.0f, 1250.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-35.0f, 0.0f, 1000.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(40.0f, 0.0f, 1250.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(8.0f, 0.0f, 1030.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(-10.0f, 0.0f, 1080.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(12.0f, 0.0f, 1110.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(12.0f, 0.0f, 1110.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(-4.0f, 0.0f, 1190.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(-40.0f, 0.0f, 1250.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-20.0f, 0.0f, 1290.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(25.0f, 0.0f, 1320.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-20.0f, 0.0f, 1290.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(25.0f, 0.0f, 1320.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(30.0f, 0.0f, 1330.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(-35.0f, 0.0f, 1340.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
 
 
 
     geometryList.add(CreateCube(vec3(20.0f, 0.0f, 50.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-22.0f, 0.0f, 80.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(47.0f, 0.0f, 110.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-40.0f, 0.0f, 120.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(50.0f, 0.0f, 150.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-27.0f, 0.0f, 170.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-7.0f, 0.0f, 140.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-22.0f, 0.0f, 80.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Orange, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(47.0f, 0.0f, 110.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-40.0f, 0.0f, 120.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(50.0f, 0.0f, 150.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-27.0f, 0.0f, 170.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-7.0f, 0.0f, 140.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Orange, 0, "Column_Obstacle", false));
     geometryList.add(CreateCube(vec3(10.0f, 0.0f, 250.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-10.0f, 0.0f, 200.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-31.0f, 0.0f, 240.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(25.0f, 0.0f, 300.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
-    geometryList.add(CreateCube(vec3(-50.0f, 0.0f, 320.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Blue, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-10.0f, 0.0f, 200.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-31.0f, 0.0f, 240.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Red, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(25.0f, 0.0f, 300.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Yellow, 0, "Column_Obstacle", false));
+    geometryList.add(CreateCube(vec3(-50.0f, 0.0f, 320.0f + 1360.0f + 95.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
 
     geometryList.add(CreateRamp(vec3(0.0f, 0.0f, 1300.0f), vec3(30.0f, 1.0f, 25.0f), Red, -15.0f, {1,0,0}, "Ramp_Obstacle", 0, false));
 

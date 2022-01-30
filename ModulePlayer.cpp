@@ -178,6 +178,18 @@ update_status ModulePlayer::Update(float dt)
 			turn -= TURN_DEGREES;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
+		App->player->vehicle->SetPos(initialPosition.x(), initialPosition.y(), initialPosition.z());
+
+		mat4x4 tr;
+		tr.rotate(0, vec3(0, 1, 0));
+		vehicle->vehicle->getRigidBody()->setAngularVelocity(btVector3(0, 0, 0));
+		vehicle->SetTransform(&tr);
+
+		vehicle->SetLinearVelocity(0, 0, 0);
+	}
+
 	//if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 	//{
 	//	brake = BRAKE_POWER;

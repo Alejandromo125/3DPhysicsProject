@@ -30,6 +30,7 @@ public:
 	void SetPos(float x, float y, float z);
 	void SetRotation(btQuaternion q);
 	void SetAsSensor(bool is_sensor);
+	void SetLinearVelocity(float x, float y, float z);
 	bool IsSensor();
 
 private:
