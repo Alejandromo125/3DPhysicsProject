@@ -264,6 +264,7 @@ update_status ModuleSceneIntro::Update(float dt)
 
     if (sceneBeginTimer <= 240)
     {
+        /* //This feature of switching vehicles is finally removed
         if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && vehicleIndex != 1)
         {
             App->player->vehicle->SetPos(App->player2->currentPlayerPosition.x(), App->player2->currentPlayerPosition.y(), App->player2->currentPlayerPosition.z());
@@ -278,6 +279,7 @@ update_status ModuleSceneIntro::Update(float dt)
 
             vehicleIndex = 2;
         }
+        */
     }
 
     if (countDownTimer <= 0)
