@@ -266,7 +266,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
         if (body2->name == "Barrier_Lap_Sensor")
         {
-            
+            App->player->lapDone = true;
         }
 
         if (body2->name == "Dirt_Slower_Sensor")

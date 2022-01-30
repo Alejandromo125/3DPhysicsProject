@@ -39,6 +39,7 @@ public:
 	int lastMinutes = 0;
 
 	bool winCondition = false;
+	bool lapDone = false;
 
 	bool inDirt = false;
 
