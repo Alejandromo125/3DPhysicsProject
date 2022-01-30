@@ -19,5 +19,5 @@ Link to the project: https://github.com/Alejandromo125/3DPhysicsProject
 * Number Keys 1 and 2 to select vehicle (only available during initial countdown)
 
 ## Game Features
-The game consists on an infinite road fuymed by a seamless teleport where you have to drive your vehicle as fast as possible i order to complete 4 laps.
+The game consists on an infinite road fuymed by a seamless teleport where you have to drive your chosen vehicle as fast as possible i order to complete 4 laps.
 Once completed, your final time score will appear on the window title banner. If you are too slow you will loose.
