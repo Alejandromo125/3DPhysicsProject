@@ -37,7 +37,7 @@ public:
 	int minutes = 0;
 	int lastSeconds = 0;
 	int lastMinutes = 0;
-
+	int NumberOfLaps = 0;
 	bool winCondition = false;
 	bool lapDone = false;
 

@@ -262,13 +262,14 @@ update_status ModulePlayer::Update(float dt)
 		lastSeconds = seconds;
 		lastMinutes = minutes;
 		lapDone = false;
+		//NumberOfLaps++;
 	}
 
 	if (inDirt == true)
 	{
 		if (vehicle->GetKmh() > 50)
 		{
-			vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()));
+			vehicle->ApplyEngineForce(App->physics->DragForce(vehicle->GetKmh()+400.0f));
 		}
 	}
 
@@ -332,6 +333,10 @@ update_status ModulePlayer::Update(float dt)
 
 	currentPlayerPosition = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 
+	if (NumberOfLaps == 4)
+	{
+		exit(0);
+	}
 	return UPDATE_CONTINUE;
 }
 
