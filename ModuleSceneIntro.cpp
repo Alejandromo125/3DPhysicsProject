@@ -35,7 +35,7 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(-15.0f, 5.0f, 15.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_L", false));
     geometryList.add(CreateCube(vec3(15.0f, 5.0f, 15.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_R", false));
     geometryList.add(CreateCube(vec3(0.0f, 11.0f, 15.0f), vec3(32.0f, 2.0f, 2.0f), White, 0, "Barrier_Lap_T", false));
-    geometryList.add(CreateCube(vec3(0.0f, 11.0f, 15.0f), vec3(32.0f, 500.0f, 2.0f), White, 0, "Barrier_Lap_Sensor", true));
+    geometryList.add(CreateCube(vec3(0.0f, 11.0f, 15.0f), vec3(32.0f, 500.0f, 0.5f), White, 0, "Barrier_Lap_Sensor", true));
     geometryList.add(CreateCube(vec3(0.0f, 11.0f, 1340.0f), vec3(32.0f, 500.0f, 2.0f), White, 0, "Barrier_Lap_Sensor_Activator", true));
 
     // General setup
@@ -267,12 +267,16 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
         if (body2->name == "Barrier_Lap_Sensor_Activator")
         {
+
             lapSensorActivated = true;
+            
+            
         }
 
         if (body2->name == "Barrier_Lap_Sensor")
         {
-            if(lapSensorActivated == true) App->player->lapDone = true;
+            if(lapSensorActivated == true) App->player->lapDone = true; 
+            if (lapSensorActivated == true) lapSensorActivated = false;
         }
 
         if (body2->name == "Dirt_Slower_Sensor")

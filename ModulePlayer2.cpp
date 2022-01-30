@@ -20,7 +20,7 @@ ModulePlayer2::~ModulePlayer2()
 bool ModulePlayer2::Start()
 {
 	LOG("Loading player");
-
+	/*
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
@@ -124,7 +124,7 @@ bool ModulePlayer2::Start()
 	//App->physics->AddConstraintP2P(*decorBody->body, *vehicle->body, car.rear_chassis_offset, car.rear_chassis_offset);
 
 	inDirt = false;
-
+	*/
 	return true;
 }
 
@@ -139,6 +139,7 @@ bool ModulePlayer2::CleanUp()
 // Update: draw background
 update_status ModulePlayer2::Update(float dt)
 {
+/*
 	turn = acceleration = brake = 0.0f;
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && (vehicle->GetKmh() < 120))
@@ -155,10 +156,7 @@ update_status ModulePlayer2::Update(float dt)
 
 		else
 		{
-			/*if (slow == true)
-			{
-				vehicle->body->setLinearVelocity(vehicle->body->getLinearVelocity() / 1.03f);
-			}*/
+			
 
 			if (vehicle->GetKmh() < -30)
 			{
@@ -356,6 +354,7 @@ update_status ModulePlayer2::Update(float dt)
 	{
 		exit(0);
 	}
+*/
 	return UPDATE_CONTINUE;
 }
 
