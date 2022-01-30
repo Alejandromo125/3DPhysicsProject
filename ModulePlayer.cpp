@@ -180,6 +180,8 @@ update_status ModulePlayer::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
+		App->scene_intro->lapSensorActivated = false;
+
 		App->player->vehicle->SetPos(initialPosition.x(), initialPosition.y(), initialPosition.z());
 
 		mat4x4 tr;
@@ -304,6 +306,8 @@ update_status ModulePlayer::Update(float dt)
 	}
 	if (PositionInTheAir.getY() < -2)
 	{
+		App->scene_intro->lapSensorActivated = false;
+
 		App->player->vehicle->SetPos(initialPosition.x(), initialPosition.y(), initialPosition.z());
 
 		mat4x4 tr;
