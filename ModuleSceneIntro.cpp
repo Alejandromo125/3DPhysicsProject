@@ -61,8 +61,7 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(-15.0f, 0.0f, 465.0f), vec3(1.0f, 6.5f, 2560.0f), Black, 0, "Left_Railing", false));
     geometryList.add(CreateCube(vec3(15.0f, 0.0f, 465.0f), vec3(1.0f, 6.5f, 2560.0f), Black, 0, "Right_Railing", false));
 
-    geometryList.add(CreateCube(vec3(-16.0f, 0.0f, 465.0f), vec3(1.0f, 500.0f, 1560.0f), Invisible, 0, "Inv_Limit", false));
-    geometryList.add(CreateCube(vec3(16.0f, 0.0f, 465.0f), vec3(1.0f, 500.0f, 1560.0f), Invisible, 0, "Inv_Limit", false));
+   
 
     // Teleports
 
