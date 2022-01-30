@@ -372,6 +372,10 @@ update_status ModulePlayer::Update(float dt)
 		{
 			sprintf_s(title, "Your Final Time: %d m %d s", minutes, seconds);
 		}
+		if (App->scene_intro->trueLooseCondition == true)
+		{
+			sprintf_s(title, "Time is up! You lost");
+		}
 		if (winCondition == true)
 		{
 			if (vehicle->GetKmh() > 0)
