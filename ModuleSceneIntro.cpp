@@ -49,7 +49,7 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 610.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 3", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 860.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 4", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1110.0f), vec3(30.0f, 0.0f, 250.0f), White, 0, "Ground Part 5", false));
-
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, -1000.0f), vec3(30.0f, 10.0f, 10000.0f), White, 0, "GroundSensor", true));
     geometryList.add(CreateCube(vec3(-15.0f, 5.0f, 1470.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_L", false));
     geometryList.add(CreateCube(vec3(15.0f, 5.0f, 1470.0f), vec3(2.0f, 10.0f, 2.0f), White, 0, "Barrier_Lap_R", false));
     geometryList.add(CreateCube(vec3(0.0f, 11.0f, 1470.0f), vec3(32.0f, 2.0f, 2.0f), White, 0, "Barrier_Lap_T", false));
@@ -70,18 +70,18 @@ bool ModuleSceneIntro::Start()
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 100.0f), vec3(30.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 110.0f), vec3(30.0f, 0.7f, 15.0f), Grey, 0, "Dirt_Slower", false));
-    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 110.0f), vec3(30.0f, 0.7f, 15.0f), Grey, 0, "Dirt_Slower_Sensor", true));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 110.0f), vec3(30.0f, 500.0f, 15.0f), Grey, 0, "Dirt_Slower_Sensor", true));
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 210.0f), vec3(30.0f, 0.7f, 35.0f), Grey, 0, "Dirt_Slower", false));
-    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 210.0f), vec3(30.0f, 0.7f, 35.0f), Grey, 0, "Dirt_Slower_Sensor", true));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 210.0f), vec3(30.0f, 500.0f, 35.0f), Grey, 0, "Dirt_Slower_Sensor", true));
 
     geometryList.add(CreateCube(vec3(-5.0f, 0.0f, 320.0f), vec3(15.0f, 0.7f, 50.0f), Grey, 0, "Dirt_Slower", false));
-    geometryList.add(CreateCube(vec3(-5.0f, 0.0f, 320.0f), vec3(15.0f, 0.7f, 50.0f), Grey, 0, "Dirt_Slower_Sensor", true));
+    geometryList.add(CreateCube(vec3(-5.0f, 0.0f, 320.0f), vec3(15.0f, 500.0f, 50.0f), Grey, 0, "Dirt_Slower_Sensor", true));
 
     geometryList.add(CreateCube(vec3(10.0f, 0.0f, 320.0f), vec3(10.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1210.0f), vec3(30.0f, 0.7f, 15.0f), Grey, 0, "Dirt_Slower", false));
-    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1210.0f), vec3(30.0f, 0.7f, 15.0f), Grey, 0, "Dirt_Slower_Sensor", true));
+    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 1210.0f), vec3(30.0f, 500.0f, 15.0f), Grey, 0, "Dirt_Slower_Sensor", true));
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 470.0f), vec3(30.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
     geometryList.add(CreateCube(vec3(4.5f, 0.0f, 470.0f), vec3(4.0f, 1000.6f, 4.0f), Green, 0, "Column_Obstacle", false));
@@ -104,7 +104,7 @@ bool ModuleSceneIntro::Start()
 
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 856.0f), vec3(30.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 865.0f), vec3(30.0f, 0.5f, 10.0f), Grey, 0, "Dirt_Slower", false));
-    geometryList.add(CreateCube(vec3(0.0f, 0.0f, 865.0f), vec3(30.0f, 0.5f, 10.0f), Grey, 0, "Dirt_Slower_Sensor", true));
+   geometryList.add(CreateCube(vec3(0.0f, 0.0f, 865.0f), vec3(30.0f, 500.0f, 10.0f), Grey, 0, "Dirt_Slower_Sensor", true));
     geometryList.add(CreateCube(vec3(0.0f, 0.0f, 876.0f), vec3(30.0f, 5.6f, 2.0f), Black, 0, "Barrier_Obstacle", false));
 
 
@@ -279,7 +279,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
         {
             App->player->inDirt = true;
         }
-        //else App->player->inDirt = false;
+        if(body2->name=="GroundSensor") App->player->inDirt = false;
 
         if (body2->name == "Portal_End")
         {
